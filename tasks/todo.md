@@ -300,14 +300,14 @@
 **Description:** Build Server Actions for lists and interactive column UI with inline editing and quick add.
 
 **Acceptance criteria:**
-- [ ] `src/features/lists/lists.api.ts` provides `createListAction`, `updateListTitleAction`, and `deleteListAction`.
-- [ ] `src/features/lists/components/list-column.tsx` renders a Kanban column container with editable title and delete menu.
-- [ ] `src/features/lists/components/add-list-input.tsx` provides inline expandable button/input for creating a list.
+- [x] `src/features/lists/lists.api.ts` provides `createListAction`, `updateListTitleAction`, and `deleteListAction`.
+- [x] `src/features/lists/components/list-column.tsx` renders a Kanban column container with editable title and delete menu.
+- [x] `src/features/lists/components/add-list-input.tsx` provides inline expandable button/input for creating a list.
 
 **Verification:**
-- [ ] Tests pass: `bun run check:arch` passes
-- [ ] Build succeeds: `bun x tsc --noEmit`
-- [ ] Manual check: Clicking list title switches to inline input for editing
+- [x] Tests pass: `bun run check:arch` passes
+- [x] Build succeeds: `bun x tsc --noEmit`
+- [x] Manual check: Clicking list title switches to inline input for editing
 
 **Dependencies:** Task 4, Task 10
 
@@ -321,9 +321,9 @@
 ---
 
 ## Checkpoint: Lists Management
-- [ ] Lists can be created, edited, and deleted
-- [ ] Cascade rules and permissions verified
-- [ ] Review with human before proceeding
+- [x] Lists can be created, edited, and deleted
+- [x] Cascade rules and permissions verified
+- [x] Review with human before proceeding
 
 ---
 

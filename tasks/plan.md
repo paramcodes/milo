@@ -81,10 +81,10 @@ Seeding & Final Verification (prisma/seed.ts, check:arch, check:size, tests)
 
 ### Phase 4: Lists & Column Management (Vertical Slice)
 - [x] Task 10: Lists Domain Backend (`src/features/lists/lists.{schema,repo,service}.ts`)
-- [ ] Task 11: Lists Server Actions & Column Components (`src/features/lists/lists.api.ts`, list components)
+- [x] Task 11: Lists Server Actions & Column Components (`src/features/lists/lists.api.ts`, list components)
 
 ### Checkpoint: Lists Management
-- [ ] Lists can be added, updated inline, and deleted with cascading card removal
+- [x] Lists can be added, updated inline, and deleted with cascading card removal
 
 ### Phase 5: Cards Core & Quick Add (Vertical Slice)
 - [ ] Task 12: Cards Domain Backend (`src/features/cards/cards.{schema,repo,service}.ts`)
