@@ -57,16 +57,16 @@
 **Description:** Implement zero-dependency core types (branded IDs, `Result<T, E>`), pure reordering math for drag-and-drop, and structured JSON telemetry.
 
 **Acceptance criteria:**
-- [ ] `src/shared/kernel/primitives.ts` defines branded types for `UserId`, `BoardId`, `ListId`, `CardId`, and `ChecklistItemId`.
-- [ ] `src/shared/kernel/result.ts` provides typed `Result.success(data)` and `Result.failure(code, message, details)` helper contracts.
-- [ ] `src/shared/calc/reorder.calc.ts` provides pure `calculateReorderedPosition` distributing positions in multiples of 1000.
-- [ ] `src/shared/calc/reorder.calc.test.ts` thoroughly tests intra-list, cross-list, and edge-case reordering.
-- [ ] `src/shared/telemetry/logger.ts` outputs structured JSON logs for info, warn, and error without raw `console.log`.
+- [x] `src/shared/kernel/primitives.ts` defines branded types for `UserId`, `BoardId`, `ListId`, `CardId`, and `ChecklistItemId`.
+- [x] `src/shared/kernel/result.ts` provides typed `Result.success(data)` and `Result.failure(code, message, details)` helper contracts.
+- [x] `src/shared/calc/reorder.calc.ts` provides pure `calculateReorderedPosition` distributing positions in multiples of 1000.
+- [x] `src/shared/calc/reorder.calc.test.ts` thoroughly tests intra-list, cross-list, and edge-case reordering.
+- [x] `src/shared/telemetry/logger.ts` outputs structured JSON logs for info, warn, and error without raw `console.log`.
 
 **Verification:**
-- [ ] Tests pass: `bun test src/shared/calc/reorder.calc.test.ts` passes with 100% coverage
-- [ ] Build succeeds: `bun x tsc --noEmit`
-- [ ] Manual check: Verify `src/shared/` has zero feature or server imports
+- [x] Tests pass: `bun test src/shared/calc/reorder.calc.test.ts` passes with 100% coverage
+- [x] Build succeeds: `bun x tsc --noEmit`
+- [x] Manual check: Verify `src/shared/` has zero feature or server imports
 
 **Dependencies:** Task 1
 
