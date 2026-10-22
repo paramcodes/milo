@@ -18,7 +18,7 @@ Milo requires **Bun** (v1.1+) and **Node.js** (v18+).
 
 ```bash
 # 1. Clone the repository
-git clone https://github.com/your-username/milo.git
+git clone https://github.com/paramcodes/milo.git
 cd milo
 
 # 2. Install dependencies

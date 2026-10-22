@@ -114,7 +114,7 @@ Milo is architected with strict Vertical Feature Slices and layered boundaries:
 
 ```bash
 # 1. Clone the repository
-git clone https://github.com/your-username/milo.git
+git clone https://github.com/paramcodes/milo.git
 cd milo
 
 # 2. Install dependencies
