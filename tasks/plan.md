@@ -72,7 +72,7 @@ Seeding & Final Verification (prisma/seed.ts, check:arch, check:size, tests)
 - [x] Protected dashboard route redirects unauthenticated requests
 
 ### Phase 3: Boards & Workspace Dashboard (Vertical Slice)
-- [ ] Task 8: Boards Domain Backend (`src/features/boards/boards.{schema,repo,service}.ts`)
+- [x] Task 8: Boards Domain Backend (`src/features/boards/boards.{schema,repo,service}.ts`)
 - [ ] Task 9: Boards Server Actions & Dashboard Shell (`src/features/boards/boards.api.ts`, dashboard components)
 
 ### Checkpoint: Boards & Dashboard

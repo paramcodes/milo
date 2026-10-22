@@ -211,15 +211,15 @@
 **Description:** Implement schemas, database repository, and business service with CQRS (queries vs. commands) for board management.
 
 **Acceptance criteria:**
-- [ ] `src/features/boards/boards.schema.ts` defines `createBoardSchema`, `updateBoardSchema`, and board DTOs.
-- [ ] `src/features/boards/boards.repo.ts` executes Prisma queries for boards and team workspace memberships.
-- [ ] `src/features/boards/boards.service.ts` enforces user workspace permissions and separates read queries (`getBoard`, `getUserBoards`) from write commands (`createBoard`, `updateBoard`).
-- [ ] `src/features/boards/boards.service.test.ts` tests board creation, ownership validation, and querying on ephemeral SQLite.
+- [x] `src/features/boards/boards.schema.ts` defines `createBoardSchema`, `updateBoardSchema`, and board DTOs.
+- [x] `src/features/boards/boards.repo.ts` executes Prisma queries for boards and team workspace memberships.
+- [x] `src/features/boards/boards.service.ts` enforces user workspace permissions and separates read queries (`getBoard`, `getUserBoards`) from write commands (`createBoard`, `updateBoard`).
+- [x] `src/features/boards/boards.service.test.ts` tests board creation, ownership validation, and querying on ephemeral SQLite.
 
 **Verification:**
-- [ ] Tests pass: `bun test src/features/boards/boards.service.test.ts` passes
-- [ ] Build succeeds: `bun x tsc --noEmit`
-- [ ] Manual check: Unauthorized access attempts return `Result.failure('UNAUTHORIZED', ...)`
+- [x] Tests pass: `bun test src/features/boards/boards.service.test.ts` passes
+- [x] Build succeeds: `bun x tsc --noEmit`
+- [x] Manual check: Unauthorized access attempts return `Result.failure('UNAUTHORIZED', ...)`
 
 **Dependencies:** Task 2, Task 3, Task 6
 
