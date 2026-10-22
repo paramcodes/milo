@@ -85,16 +85,16 @@
 **Description:** Implement Atlassian design tokens, class merge utility, and foundational UI components (Button, Input, Badge).
 
 **Acceptance criteria:**
-- [ ] `src/shared/ui/atlassian-tokens.ts` exports color constants and hex tokens matching Atlassian design palette (neutral, primary, success, warning, danger).
-- [ ] `src/shared/ui/cn.util.ts` exports `cn()` using `clsx` and `tailwind-merge` (file named `cn.util.ts`, not `utils.ts`).
-- [ ] `src/shared/ui/button.tsx` and `button.test.tsx` provide accessible button variants with unit tests.
-- [ ] `src/shared/ui/input.tsx` provides styled form input.
-- [ ] `src/shared/ui/badge.tsx` provides color badge chips for Trello labels.
+- [x] `src/shared/ui/atlassian-tokens.ts` exports color constants and hex tokens matching Atlassian design palette (neutral, primary, success, warning, danger).
+- [x] `src/shared/ui/cn.util.ts` exports `cn()` using `clsx` and `tailwind-merge` (file named `cn.util.ts`, not `utils.ts`).
+- [x] `src/shared/ui/button.tsx` and `button.test.tsx` provide accessible button variants with unit tests.
+- [x] `src/shared/ui/input.tsx` provides styled form input.
+- [x] `src/shared/ui/badge.tsx` provides color badge chips for Trello labels.
 
 **Verification:**
-- [ ] Tests pass: `bun test src/shared/ui/button.test.tsx` passes
-- [ ] Build succeeds: `bun x tsc --noEmit`
-- [ ] Manual check: Verify no file named `utils.ts` exists in the repo
+- [x] Tests pass: `bun test src/shared/ui/button.test.tsx` passes
+- [x] Build succeeds: `bun x tsc --noEmit`
+- [x] Manual check: Verify no file named `utils.ts` exists in the repo
 
 **Dependencies:** Task 1, Task 3
 
@@ -104,17 +104,18 @@
 - `src/shared/ui/button.tsx`
 - `src/shared/ui/button.test.tsx`
 - `src/shared/ui/input.tsx`
+- `src/shared/ui/badge.tsx`
 
 **Estimated scope:** Medium (5 files)
 
 ---
 
 ## Checkpoint: Foundation & Guardrails
-- [ ] All unit tests pass (`bun run test`)
-- [ ] `bun run check:arch` passes with zero layer violations
-- [ ] `bun run check:size` passes with all files < 400 LOC
-- [ ] `bun run check` reports clean formatting and linting
-- [ ] Review foundation with human before proceeding
+- [x] All unit tests pass (`bun run test`)
+- [x] `bun run check:arch` passes with zero layer violations
+- [x] `bun run check:size` passes with all files < 400 LOC
+- [x] `bun run check` reports clean formatting and linting
+- [x] Review foundation with human before proceeding
 
 ---
 

@@ -55,12 +55,12 @@ Seeding & Final Verification (prisma/seed.ts, check:arch, check:size, tests)
 - [x] Task 1: Project Setup, Config & Mechanical Guardrails (`package.json`, `tsconfig.json`, `biome.json`, `scripts/`)
 - [x] Task 2: Database Schema & Client (`prisma/schema.prisma`, `src/server/db/client.ts`)
 - [x] Task 3: Shared Kernel, Calculation Math & Telemetry (`src/shared/kernel/`, `src/shared/calc/`, `src/shared/telemetry/`)
-- [ ] Task 4: Shared UI Primitives & Atlassian Design Tokens (`src/shared/ui/`)
+- [x] Task 4: Shared UI Primitives & Atlassian Design Tokens (`src/shared/ui/`)
 
 ### Checkpoint: Foundation & Guardrails
-- [ ] TypeScript compiles cleanly
-- [ ] Unit tests for `reorder.calc` and UI primitives pass
-- [ ] Architectural linter and file size guard execute cleanly
+- [x] TypeScript compiles cleanly
+- [x] Unit tests for `reorder.calc` and UI primitives pass
+- [x] Architectural linter and file size guard execute cleanly
 
 ### Phase 2: Authentication & Session Management (Vertical Slice)
 - [ ] Task 5: Server Auth Crypto & Session Engine (`src/server/auth/session.ts`, `session.test.ts`)
