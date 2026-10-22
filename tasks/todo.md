@@ -148,15 +148,15 @@
 **Description:** Create the vertical slice backend for auth: Zod schemas, isolated repository queries, and service business logic with zero-mock SQLite tests.
 
 **Acceptance criteria:**
-- [ ] `src/features/auth/auth.schema.ts` defines `loginSchema`, `registerSchema`, and inferred DTO types.
-- [ ] `src/features/auth/auth.repo.ts` handles Prisma queries for user lookups, user creation, and session tracking.
-- [ ] `src/features/auth/auth.service.ts` coordinates registration, password validation, and session creation returning `Result<UserSessionDto>`.
-- [ ] `src/features/auth/auth.service.test.ts` validates registration and login flows against ephemeral SQLite database with real constraints.
+- [x] `src/features/auth/auth.schema.ts` defines `loginSchema`, `registerSchema`, and inferred DTO types.
+- [x] `src/features/auth/auth.repo.ts` handles Prisma queries for user lookups, user creation, and session tracking.
+- [x] `src/features/auth/auth.service.ts` coordinates registration, password validation, and session creation returning `Result<UserSessionDto>`.
+- [x] `src/features/auth/auth.service.test.ts` validates registration and login flows against ephemeral SQLite database with real constraints.
 
 **Verification:**
-- [ ] Tests pass: `bun test src/features/auth/auth.service.test.ts` passes
-- [ ] Build succeeds: `bun x tsc --noEmit`
-- [ ] Manual check: Duplicate user registration properly returns a typed error failure
+- [x] Tests pass: `bun test src/features/auth/auth.service.test.ts` passes
+- [x] Build succeeds: `bun x tsc --noEmit`
+- [x] Manual check: Duplicate user registration properly returns a typed error failure
 
 **Dependencies:** Task 2, Task 3, Task 5
 

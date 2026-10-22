@@ -64,7 +64,7 @@ Seeding & Final Verification (prisma/seed.ts, check:arch, check:size, tests)
 
 ### Phase 2: Authentication & Session Management (Vertical Slice)
 - [x] Task 5: Server Auth Crypto & Session Engine (`src/server/auth/session.ts`, `session.test.ts`)
-- [ ] Task 6: Auth Domain Backend & Verification (`src/features/auth/auth.{schema,repo,service}.ts`)
+- [x] Task 6: Auth Domain Backend & Verification (`src/features/auth/auth.{schema,repo,service}.ts`)
 - [ ] Task 7: Auth Server Actions & Authentication UI (`src/features/auth/auth.api.ts`, login/register pages)
 
 ### Checkpoint: Authentication
