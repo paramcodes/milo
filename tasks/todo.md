@@ -333,15 +333,15 @@
 **Description:** Implement schemas, repository queries, and service logic for card creation, title editing, and deletion.
 
 **Acceptance criteria:**
-- [ ] `src/features/cards/cards.schema.ts` defines `createCardSchema`, `updateCardSchema`, and card DTOs.
-- [ ] `src/features/cards/cards.repo.ts` executes Prisma queries for card creation, updates, and list containment.
-- [ ] `src/features/cards/cards.service.ts` validates list existence, calculates initial card position, and returns `Result<CardDto>`.
-- [ ] `src/features/cards/cards.service.test.ts` tests card creation, position ordering, and deletion on ephemeral SQLite.
+- [x] `src/features/cards/cards.schema.ts` defines `createCardSchema`, `updateCardSchema`, and card DTOs.
+- [x] `src/features/cards/cards.repo.ts` executes Prisma queries for card creation, updates, and list containment.
+- [x] `src/features/cards/cards.service.ts` validates list existence, calculates initial card position, and returns `Result<CardDto>`.
+- [x] `src/features/cards/cards.service.test.ts` tests card creation, position ordering, and deletion on ephemeral SQLite.
 
 **Verification:**
-- [ ] Tests pass: `bun test src/features/cards/cards.service.test.ts` passes
-- [ ] Build succeeds: `bun x tsc --noEmit`
-- [ ] Manual check: Adding cards increments positions by 1000
+- [x] Tests pass: `bun test src/features/cards/cards.service.test.ts` passes
+- [x] Build succeeds: `bun x tsc --noEmit`
+- [x] Manual check: Adding cards increments positions by 1000
 
 **Dependencies:** Task 3, Task 10
 

@@ -87,7 +87,7 @@ Seeding & Final Verification (prisma/seed.ts, check:arch, check:size, tests)
 - [x] Lists can be added, updated inline, and deleted with cascading card removal
 
 ### Phase 5: Cards Core & Quick Add (Vertical Slice)
-- [ ] Task 12: Cards Domain Backend (`src/features/cards/cards.{schema,repo,service}.ts`)
+- [x] Task 12: Cards Domain Backend (`src/features/cards/cards.{schema,repo,service}.ts`)
 - [ ] Task 13: Cards Server Actions & Card Tile Components (`src/features/cards/cards.api.ts`, card components)
 
 ### Checkpoint: Cards Management
