@@ -117,16 +117,16 @@ Seeding & Final Verification (prisma/seed.ts, check:arch, check:size, tests)
 
 ### Phase 9: Seeding, Verification & Final Polish
 - [x] Task 18: Demo Seed Script (`prisma/seed.ts` for instant "Sprint Planning" testing)
-- [ ] Task 19: Full Suite Verification & Mechanical Guardrail Pass (all verification commands green)
+- [x] Task 19: Full Suite Verification & Mechanical Guardrail Pass (all verification commands green)
 
 ### Checkpoint: Release Ready
-- [ ] Zero TypeScript errors (`tsrs` / `bun x tsc --noEmit`)
-- [ ] Zero Biome lint/formatting errors (`bun run check`)
-- [ ] Zero architectural violations (`bun run check:arch`)
-- [ ] Zero files > 400 LOC (`bun run check:size`)
-- [ ] Zero dead code / unused exports (`bun run knip`)
-- [ ] 100% tests passing (`bun run test`)
-- [ ] Seed script executes cleanly (`bun run seed`)
+- [x] Zero TypeScript errors (`tsrs` / `bun x tsc --noEmit`)
+- [x] Zero Biome lint/formatting errors (`bun run check`)
+- [x] Zero architectural violations (`bun run check:arch`)
+- [x] Zero files > 400 LOC (`bun run check:size`)
+- [x] Zero dead code / unused exports (`bun run knip`)
+- [x] 100% tests passing (`bun run test`)
+- [x] Seed script executes cleanly (`bun run seed`)
 
 ## Risks and Mitigations
 | Risk | Impact | Mitigation |

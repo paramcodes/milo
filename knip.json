@@ -1,6 +1,12 @@
 {
   "$schema": "https://unpkg.com/knip@5/overview/configuration-schema.json",
-  "entry": ["src/app/**/*.{ts,tsx}", "prisma/seed.ts"],
-  "project": ["src/**/*.{ts,tsx}"],
-  "ignoreDependencies": ["prisma"]
+  "entry": [
+    "src/app/**/*.{ts,tsx}",
+    "src/shared/**/*.{ts,tsx}",
+    "src/features/**/*.{api,service,repo,schema,presenter}.ts",
+    "src/server/**/*.{ts,tsx}",
+    "scripts/*.ts"
+  ],
+  "project": ["src/**/*.{ts,tsx}", "scripts/*.ts"],
+  "ignoreExportsUsedInFile": true
 }

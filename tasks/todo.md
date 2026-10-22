@@ -547,17 +547,17 @@
 **Description:** Execute all canonical quality verification commands across the entire repository to ensure 100% compliance with SPEC.md and AGENTS.md.
 
 **Acceptance criteria:**
-- [ ] `bun run check:arch` passes with 0 layer/import violations.
-- [ ] `bun run check:size` passes with 0 files exceeding 400 LOC.
-- [ ] `bun run check` (Biome) passes with 0 lint or format warnings.
-- [ ] `tsrs` (or `bun x tsc --noEmit`) passes with 0 type errors under strict TypeScript.
-- [ ] `bun run knip` detects 0 dead code or orphaned exports.
-- [ ] `bun run test` runs all unit, calculation, component, and zero-mock integration tests with 100% pass rate.
+- [x] `bun run check:arch` passes with 0 layer/import violations.
+- [x] `bun run check:size` passes with 0 files exceeding 400 LOC.
+- [x] `bun run check` (Biome) passes with 0 lint or format warnings.
+- [x] `tsrs` (or `bun x tsc --noEmit`) passes with 0 type errors under strict TypeScript.
+- [x] `bun run knip` detects 0 dead code or orphaned exports.
+- [x] `bun run test` runs all unit, calculation, component, and zero-mock integration tests with 100% pass rate.
 
 **Verification:**
-- [ ] Tests pass: `bun run test` passes
-- [ ] Build succeeds: `bun run build` succeeds
-- [ ] Manual check: All guardrail commands exit with code 0
+- [x] Tests pass: `bun run test` passes
+- [x] Build succeeds: `bun run build` succeeds
+- [x] Manual check: All guardrail commands exit with code 0
 
 **Dependencies:** All previous tasks (Tasks 1-18)
 
@@ -570,6 +570,6 @@
 ---
 
 ## Final Checkpoint: Ready for Release
-- [ ] All 19 tasks completed and verified
-- [ ] Core acceptance criteria from `SPEC.md` satisfied
-- [ ] Final human review and sign-off
+- [x] All 19 tasks completed and verified
+- [x] Core acceptance criteria from `SPEC.md` satisfied
+- [x] Final human review and sign-off
