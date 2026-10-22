@@ -174,16 +174,16 @@
 **Description:** Implement Server Actions for login/register/logout and interactive authentication forms and pages.
 
 **Acceptance criteria:**
-- [ ] `src/features/auth/auth.api.ts` defines Server Actions (`loginAction`, `registerAction`, `logoutAction`) setting/clearing session cookies.
-- [ ] `src/features/auth/components/login-form.tsx` renders accessible login form with error feedback.
-- [ ] `src/features/auth/components/register-form.tsx` renders accessible register form.
-- [ ] `src/app/(auth)/login/page.tsx` and `src/app/(auth)/register/page.tsx` render the auth forms.
-- [ ] `src/app/layout.tsx` and `src/app/globals.css` set up global layout and Tailwind Atlassian token variables.
+- [x] `src/features/auth/auth.api.ts` defines Server Actions (`loginAction`, `registerAction`, `logoutAction`) setting/clearing session cookies.
+- [x] `src/features/auth/components/login-form.tsx` renders accessible login form with error feedback.
+- [x] `src/features/auth/components/register-form.tsx` renders accessible register form.
+- [x] `src/app/(auth)/login/page.tsx` and `src/app/(auth)/register/page.tsx` render the auth forms.
+- [x] `src/app/layout.tsx` and `src/app/globals.css` set up global layout and Tailwind Atlassian token variables.
 
 **Verification:**
-- [ ] Tests pass: `bun run check:arch` passes (no DB in UI components)
-- [ ] Build succeeds: `bun x tsc --noEmit`
-- [ ] Manual check: Form inputs validate cleanly with Zod schemas
+- [x] Tests pass: `bun run check:arch` passes (no DB in UI components)
+- [x] Build succeeds: `bun x tsc --noEmit`
+- [x] Manual check: Form inputs validate cleanly with Zod schemas
 
 **Dependencies:** Task 4, Task 6
 
@@ -199,9 +199,9 @@
 ---
 
 ## Checkpoint: Authentication
-- [ ] Full registration, login, and session cookie lifecycle verified in tests
-- [ ] Clean typecheck and linting on auth slice
-- [ ] Review with human before proceeding
+- [x] Full registration, login, and session cookie lifecycle verified in tests
+- [x] Clean typecheck and linting on auth slice
+- [x] Review with human before proceeding
 
 ---
 

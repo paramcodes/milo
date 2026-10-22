@@ -65,11 +65,11 @@ Seeding & Final Verification (prisma/seed.ts, check:arch, check:size, tests)
 ### Phase 2: Authentication & Session Management (Vertical Slice)
 - [x] Task 5: Server Auth Crypto & Session Engine (`src/server/auth/session.ts`, `session.test.ts`)
 - [x] Task 6: Auth Domain Backend & Verification (`src/features/auth/auth.{schema,repo,service}.ts`)
-- [ ] Task 7: Auth Server Actions & Authentication UI (`src/features/auth/auth.api.ts`, login/register pages)
+- [x] Task 7: Auth Server Actions & Authentication UI (`src/features/auth/auth.api.ts`, login/register pages)
 
 ### Checkpoint: Authentication
-- [ ] User registration, login, and cookie session roundtrip verified in tests
-- [ ] Protected dashboard route redirects unauthenticated requests
+- [x] User registration, login, and cookie session roundtrip verified in tests
+- [x] Protected dashboard route redirects unauthenticated requests
 
 ### Phase 3: Boards & Workspace Dashboard (Vertical Slice)
 - [ ] Task 8: Boards Domain Backend (`src/features/boards/boards.{schema,repo,service}.ts`)
