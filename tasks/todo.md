@@ -125,14 +125,14 @@
 **Description:** Build cookie session encryption, signature verification, and password hashing using Web Crypto / scrypt.
 
 **Acceptance criteria:**
-- [ ] `src/server/auth/session.ts` provides `hashPassword`, `verifyPassword`, `createSessionToken`, and `verifySessionToken`.
-- [ ] Session tokens use signed payloads stored in HTTP-only, secure, SameSite cookies.
-- [ ] `src/server/auth/session.test.ts` verifies password hashing and token generation/verification.
+- [x] `src/server/auth/session.ts` provides `hashPassword`, `verifyPassword`, `createSessionToken`, and `verifySessionToken`.
+- [x] Session tokens use signed payloads stored in HTTP-only, secure, SameSite cookies.
+- [x] `src/server/auth/session.test.ts` verifies password hashing and token generation/verification.
 
 **Verification:**
-- [ ] Tests pass: `bun test src/server/auth/session.test.ts` passes
-- [ ] Build succeeds: `bun x tsc --noEmit`
-- [ ] Manual check: Confirm no passwords or secret keys are logged
+- [x] Tests pass: `bun test src/server/auth/session.test.ts` passes
+- [x] Build succeeds: `bun x tsc --noEmit`
+- [x] Manual check: Confirm no passwords or secret keys are logged
 
 **Dependencies:** Task 2, Task 3
 
