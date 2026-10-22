@@ -2,6 +2,7 @@
 
 import { moveCardAction } from '@/features/cards/cards.api';
 import { AddCardInput } from '@/features/cards/components/add-card-input';
+import { CardModal } from '@/features/cards/components/card-modal';
 import { CardTile } from '@/features/cards/components/card-tile';
 import { AddListInput } from '@/features/lists/components/add-list-input';
 import { ListColumn } from '@/features/lists/components/list-column';
@@ -20,7 +21,12 @@ interface BoardCanvasProps {
 
 export function BoardCanvas({ board, onCardClick }: BoardCanvasProps) {
   const [lists, setLists] = useState(board.lists);
+  const [selectedCardId, setSelectedCardId] = useState<string | null>(null);
   const [, startTransition] = useTransition();
+
+  const selectedCard = selectedCardId
+    ? (lists.flatMap((l) => l.cards).find((c) => c.id === selectedCardId) ?? null)
+    : null;
 
   // Sync state when props change
   useEffect(() => {
@@ -148,7 +154,10 @@ export function BoardCanvas({ board, onCardClick }: BoardCanvasProps) {
                       isCompleted={card.isCompleted}
                       labels={card.labels}
                       checklists={card.checklists}
-                      onClick={() => onCardClick?.(card.id)}
+                      onClick={() => {
+                        setSelectedCardId(card.id);
+                        onCardClick?.(card.id);
+                      }}
                     />
                   ))}
                 </ListColumn>
@@ -205,7 +214,10 @@ export function BoardCanvas({ board, onCardClick }: BoardCanvasProps) {
                                             isCompleted={card.isCompleted}
                                             labels={card.labels}
                                             checklists={card.checklists}
-                                            onClick={() => onCardClick?.(card.id)}
+                                            onClick={() => {
+                                              setSelectedCardId(card.id);
+                                              onCardClick?.(card.id);
+                                            }}
                                           />
                                         </div>
                                       )}
@@ -228,6 +240,13 @@ export function BoardCanvas({ board, onCardClick }: BoardCanvasProps) {
           </DragDropContext>
         </ClientOnlyDnd>
       </div>
+
+      <CardModal
+        card={selectedCard}
+        boardId={board.id}
+        isOpen={!!selectedCard}
+        onClose={() => setSelectedCardId(null)}
+      />
     </div>
   );
 }

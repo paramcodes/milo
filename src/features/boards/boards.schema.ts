@@ -33,9 +33,13 @@ export interface BoardDetailDto extends BoardSummaryDto {
     cards: Array<{
       id: string;
       title: string;
+      description: string | null;
       position: number;
       dueDate: Date | null;
       isCompleted: boolean;
+      listId: string;
+      createdAt: Date;
+      updatedAt: Date;
       labels: Array<{
         label: {
           id: string;

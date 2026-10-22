@@ -455,15 +455,15 @@
 **Description:** Build interactive subcomponents for the card modal: checklist with progress bar, color label picker, and due date status badge.
 
 **Acceptance criteria:**
-- [ ] `src/shared/ui/popover.tsx` provides Radix popover primitive for dropdowns and pickers.
-- [ ] `src/features/cards/components/checklist.tsx` renders checklist items, progress bar, checkbox toggles, and add-item input.
-- [ ] `src/features/cards/components/label-picker.tsx` allows selecting/deselecting color-coded Atlassian labels.
-- [ ] `src/features/cards/components/due-date-badge.tsx` displays visual due date badge with overdue/due soon styling.
+- [x] `src/shared/ui/popover.tsx` provides Radix popover primitive for dropdowns and pickers.
+- [x] `src/features/cards/components/checklist.tsx` renders checklist items, progress bar, checkbox toggles, and add-item input.
+- [x] `src/features/cards/components/label-picker.tsx` allows selecting/deselecting color-coded Atlassian labels.
+- [x] `src/features/cards/components/due-date-badge.tsx` displays visual due date badge with overdue/due soon styling.
 
 **Verification:**
-- [ ] Tests pass: `bun run check:arch` passes
-- [ ] Build succeeds: `bun x tsc --noEmit`
-- [ ] Manual check: Toggling checklist item updates progress bar percentage immediately
+- [x] Tests pass: `bun run check:arch` passes
+- [x] Build succeeds: `bun x tsc --noEmit`
+- [x] Manual check: Toggling checklist item updates progress bar percentage immediately
 
 **Dependencies:** Task 15
 
@@ -478,9 +478,9 @@
 ---
 
 ## Checkpoint: Rich Card Details & Interactions
-- [ ] Checklists, labels, and due dates mutate cleanly and update preview badges on card tiles
-- [ ] All components remain < 400 LOC
-- [ ] Review with human before proceeding
+- [x] Checklists, labels, and due dates mutate cleanly and update preview badges on card tiles
+- [x] All components remain < 400 LOC
+- [x] Review with human before proceeding
 
 ---
 

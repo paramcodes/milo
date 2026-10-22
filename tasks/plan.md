@@ -102,11 +102,11 @@ Seeding & Final Verification (prisma/seed.ts, check:arch, check:size, tests)
 
 ### Phase 7: Card Details Modal — Labels, Checklists, Due Dates (Vertical Slice)
 - [x] Task 15: Card Presenter & Modal Dialog Structure (`cards.presenter.ts`, `card-modal.tsx`)
-- [ ] Task 16: Checklist Items, Label Picker & Due Date Components (interactive checklist, color chips, due date badge)
+- [x] Task 16: Checklist Items, Label Picker & Due Date Components (interactive checklist, color chips, due date badge)
 
 ### Checkpoint: Card Details Modal
-- [ ] Card modal opens on card click; displays and mutates description, checklists, labels, and due dates
-- [ ] Presenter calculates completion percentage and overdue/due-soon status correctly
+- [x] Card modal opens on card click; displays and mutates description, checklists, labels, and due dates
+- [x] Presenter calculates completion percentage and overdue/due-soon status correctly
 
 ### Phase 8: Audit Trail & Activity Logging (Vertical Slice)
 - [ ] Task 17: Activity Stream & Audit Logging Integration (ActivityLog entries, feed component in modal)

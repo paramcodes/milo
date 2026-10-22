@@ -6,6 +6,10 @@ import React, { useState, useTransition } from 'react';
 import { deleteCardAction, updateCardAction } from '../cards.api';
 import type { CardDto } from '../cards.schema';
 
+import { Checklist } from './checklist';
+import { DueDateBadge } from './due-date-badge';
+import { LabelPicker } from './label-picker';
+
 interface CardModalProps {
   card: CardDto | null;
   boardId: string;
@@ -119,7 +123,21 @@ export function CardModal({ card, boardId, isOpen, onClose, children }: CardModa
             )}
           </div>
 
-          {/* Child Components (Checklists, Labels, Due Date, Activity) */}
+          {/* Labels Section */}
+          <LabelPicker cardId={card.id} boardId={boardId} selectedLabels={card.labels ?? []} />
+
+          {/* Due Date Section */}
+          <DueDateBadge
+            cardId={card.id}
+            boardId={boardId}
+            dueDate={card.dueDate}
+            isCompleted={card.isCompleted}
+          />
+
+          {/* Checklist Section */}
+          <Checklist cardId={card.id} boardId={boardId} items={card.checklists ?? []} />
+
+          {/* Child Components (Activity, etc.) */}
           {children}
 
           {/* Actions Footer */}

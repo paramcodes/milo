@@ -22,9 +22,13 @@ describe('BoardCanvas', () => {
             {
               id: 'c1',
               title: 'First Card',
+              description: null,
               position: 1000,
               dueDate: null,
               isCompleted: false,
+              listId: 'l1',
+              createdAt: new Date(),
+              updatedAt: new Date(),
               labels: [],
               checklists: [],
             },
