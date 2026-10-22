@@ -34,14 +34,14 @@
 **Description:** Define the SQLite Prisma schema according to `docs/DB_SCHEMA.md` and instantiate the singleton Prisma database client.
 
 **Acceptance criteria:**
-- [ ] `prisma/schema.prisma` defines models: `User`, `Session`, `Team`, `TeamMember`, `Board`, `List`, `Card`, `ChecklistItem`, `Label`, `CardLabel`, and `ActivityLog` with foreign key relations and cascade rules.
-- [ ] `src/server/db/client.ts` exports the singleton Prisma client `db` with global caching in development.
-- [ ] Prisma generates client types cleanly without errors.
+- [x] `prisma/schema.prisma` defines models: `User`, `Session`, `Team`, `TeamMember`, `Board`, `List`, `Card`, `ChecklistItem`, `Label`, `CardLabel`, and `ActivityLog` with foreign key relations and cascade rules.
+- [x] `src/server/db/client.ts` exports the singleton Prisma client `db` with global caching in development.
+- [x] Prisma generates client types cleanly without errors.
 
 **Verification:**
-- [ ] Tests pass: `bunx prisma validate` passes
-- [ ] Build succeeds: `bunx prisma generate` generates `@prisma/client`
-- [ ] Manual check: Verify `src/server/db/client.ts` has no UI imports or `.tsx` files
+- [x] Tests pass: `bunx prisma validate` passes
+- [x] Build succeeds: `bunx prisma generate` generates `@prisma/client`
+- [x] Manual check: Verify `src/server/db/client.ts` has no UI imports or `.tsx` files
 
 **Dependencies:** Task 1
 

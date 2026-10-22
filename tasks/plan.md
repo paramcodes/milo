@@ -53,7 +53,7 @@ Seeding & Final Verification (prisma/seed.ts, check:arch, check:size, tests)
 
 ### Phase 1: Foundation & Guardrails
 - [x] Task 1: Project Setup, Config & Mechanical Guardrails (`package.json`, `tsconfig.json`, `biome.json`, `scripts/`)
-- [ ] Task 2: Database Schema & Client (`prisma/schema.prisma`, `src/server/db/client.ts`)
+- [x] Task 2: Database Schema & Client (`prisma/schema.prisma`, `src/server/db/client.ts`)
 - [ ] Task 3: Shared Kernel, Calculation Math & Telemetry (`src/shared/kernel/`, `src/shared/calc/`, `src/shared/telemetry/`)
 - [ ] Task 4: Shared UI Primitives & Atlassian Design Tokens (`src/shared/ui/`)
 
