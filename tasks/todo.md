@@ -427,16 +427,16 @@
 **Description:** Implement pure view-model transformations in `cards.presenter.ts`, Radix dialog primitive, and main card modal shell.
 
 **Acceptance criteria:**
-- [ ] `src/features/cards/cards.presenter.ts` formats checklist progress percentage (e.g. "3/5", 60%) and relative due date status (overdue, due-soon, complete).
-- [ ] `src/features/cards/cards.presenter.test.ts` validates presenter calculations with 100% unit test coverage.
-- [ ] `src/shared/ui/dialog.tsx` provides an accessible, unstyled Radix dialog primitive.
-- [ ] `src/features/cards/components/card-modal.tsx` renders card details dialog with editable title and description.
-- [ ] `src/features/cards/components/card-modal.test.tsx` verifies opening dialog and editing description.
+- [x] `src/features/cards/cards.presenter.ts` formats checklist progress percentage (e.g. "3/5", 60%) and relative due date status (overdue, due-soon, complete).
+- [x] `src/features/cards/cards.presenter.test.ts` validates presenter calculations with 100% unit test coverage.
+- [x] `src/shared/ui/dialog.tsx` provides an accessible, unstyled Radix dialog primitive.
+- [x] `src/features/cards/components/card-modal.tsx` renders card details dialog with editable title and description.
+- [x] `src/features/cards/components/card-modal.test.tsx` verifies opening dialog and editing description.
 
 **Verification:**
-- [ ] Tests pass: `bun test src/features/cards/cards.presenter.test.ts` passes
-- [ ] Build succeeds: `bun x tsc --noEmit`
-- [ ] Manual check: Clicking a card tile opens the modal with card title and description
+- [x] Tests pass: `bun test src/features/cards/cards.presenter.test.ts` passes
+- [x] Build succeeds: `bun x tsc --noEmit`
+- [x] Manual check: Clicking a card tile opens the modal with card title and description
 
 **Dependencies:** Task 4, Task 12
 

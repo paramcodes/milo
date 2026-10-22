@@ -101,7 +101,7 @@ Seeding & Final Verification (prisma/seed.ts, check:arch, check:size, tests)
 - [x] Positions persisted to SQLite database with spaced ranking (multiples of 1000)
 
 ### Phase 7: Card Details Modal — Labels, Checklists, Due Dates (Vertical Slice)
-- [ ] Task 15: Card Presenter & Modal Dialog Structure (`cards.presenter.ts`, `card-modal.tsx`)
+- [x] Task 15: Card Presenter & Modal Dialog Structure (`cards.presenter.ts`, `card-modal.tsx`)
 - [ ] Task 16: Checklist Items, Label Picker & Due Date Components (interactive checklist, color chips, due date badge)
 
 ### Checkpoint: Card Details Modal
