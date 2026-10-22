@@ -392,15 +392,15 @@
 **Description:** Wire `@hello-pangea/dnd` for smooth drag-and-drop of cards (intra-list and cross-list) and horizontal reordering of lists with optimistic UI.
 
 **Acceptance criteria:**
-- [ ] `src/features/boards/components/dnd-context.tsx` provides safe SSR-compatible drag-and-drop context.
-- [ ] `src/features/boards/components/board-canvas.tsx` renders horizontal list layout with drag handlers for cards and lists, optimistic local reordering, and background server sync.
-- [ ] `src/features/boards/components/board-canvas.test.tsx` tests optimistic drag state updates and reorder calculations.
-- [ ] `src/app/(dashboard)/b/[boardId]/page.tsx` fetches board details with lists and cards and renders `<BoardCanvas />`.
+- [x] `src/features/boards/components/dnd-context.tsx` provides safe SSR-compatible drag-and-drop context.
+- [x] `src/features/boards/components/board-canvas.tsx` renders horizontal list layout with drag handlers for cards and lists, optimistic local reordering, and background server sync.
+- [x] `src/features/boards/components/board-canvas.test.tsx` tests optimistic drag state updates and reorder calculations.
+- [x] `src/app/(dashboard)/b/[boardId]/page.tsx` fetches board details with lists and cards and renders `<BoardCanvas />`.
 
 **Verification:**
-- [ ] Tests pass: `bun test src/features/boards/components/board-canvas.test.tsx` passes
-- [ ] Build succeeds: `bun x tsc --noEmit`
-- [ ] Manual check: Dragging a card reorders immediately on screen without waiting for server response
+- [x] Tests pass: `bun test src/features/boards/components/board-canvas.test.tsx` passes
+- [x] Build succeeds: `bun x tsc --noEmit`
+- [x] Manual check: Dragging a card reorders immediately on screen without waiting for server response
 
 **Dependencies:** Task 9, Task 11, Task 13
 
@@ -415,9 +415,9 @@
 ---
 
 ## Checkpoint: Fluid Drag-and-Drop Kanban Interaction
-- [ ] Drag-and-drop works smoothly across lists and within lists
-- [ ] Server actions persist new positions accurately
-- [ ] Review with human before proceeding
+- [x] Drag-and-drop works smoothly across lists and within lists
+- [x] Server actions persist new positions accurately
+- [x] Review with human before proceeding
 
 ---
 

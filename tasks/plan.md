@@ -94,11 +94,11 @@ Seeding & Final Verification (prisma/seed.ts, check:arch, check:size, tests)
 - [x] Cards can be added inline to lists and rendered as tactile tiles
 
 ### Phase 6: Interactive Drag-and-Drop Board Canvas (Vertical Slice)
-- [ ] Task 14: DnD Context & Board Canvas Integration (`@hello-pangea/dnd`, optimistic updates, board route)
+- [x] Task 14: DnD Context & Board Canvas Integration (`@hello-pangea/dnd`, optimistic updates, board route)
 
 ### Checkpoint: Board Canvas & DnD
-- [ ] Fluid drag-and-drop within and between lists with instant optimistic feedback
-- [ ] Positions persisted to SQLite database with spaced ranking (multiples of 1000)
+- [x] Fluid drag-and-drop within and between lists with instant optimistic feedback
+- [x] Positions persisted to SQLite database with spaced ranking (multiples of 1000)
 
 ### Phase 7: Card Details Modal — Labels, Checklists, Due Dates (Vertical Slice)
 - [ ] Task 15: Card Presenter & Modal Dialog Structure (`cards.presenter.ts`, `card-modal.tsx`)
