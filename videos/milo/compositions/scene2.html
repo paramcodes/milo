@@ -1,0 +1,440 @@
+<template>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    #root {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: #0052CC;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: #172B4D;
+    }
+    .board-header {
+      width: 100%;
+      height: 70px;
+      background: rgba(0, 0, 0, 0.18);
+      backdrop-filter: blur(8px);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 40px;
+      color: #ffffff;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+    }
+    .board-title-group {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .board-title {
+      font-size: 24px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+    .board-badge {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      padding: 4px 12px;
+      border-radius: 6px;
+      background: rgba(255, 255, 255, 0.15);
+      color: #E6FCFF;
+    }
+    .hud-metrics {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+    }
+    .metric-pill {
+      background: #091E42;
+      color: #00B8D9;
+      border: 1px solid rgba(0, 184, 217, 0.4);
+      padding: 6px 14px;
+      border-radius: 9999px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .board-canvas {
+      padding: 40px;
+      display: flex;
+      gap: 28px;
+      height: calc(100% - 70px);
+      align-items: flex-start;
+      position: relative;
+    }
+    .kanban-col {
+      width: 410px;
+      background: #EBECF0;
+      border-radius: 10px;
+      padding: 16px;
+      box-shadow: 0 8px 24px rgba(9, 30, 66, 0.25);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .col-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 4px 6px;
+    }
+    .col-title {
+      font-size: 17px;
+      font-weight: 700;
+      color: #172B4D;
+    }
+    .col-count {
+      font-size: 13px;
+      color: #42526E;
+      font-weight: 600;
+    }
+    .card-item {
+      background: #FFFFFF;
+      border-radius: 8px;
+      padding: 14px 16px;
+      box-shadow: 0 1px 3px rgba(9, 30, 66, 0.15), 0 0 1px rgba(9, 30, 66, 0.2);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      cursor: pointer;
+      position: relative;
+    }
+    .label-row {
+      display: flex;
+      gap: 8px;
+    }
+    .label-tag {
+      font-size: 12px;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 4px;
+      color: #FFFFFF;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .tag-green { background: #00875A; }
+    .tag-red { background: #BF2600; }
+    .tag-blue { background: #0747A6; }
+    .tag-purple { background: #5243AA; }
+
+    .card-text {
+      font-size: 16px;
+      font-weight: 600;
+      color: #172B4D;
+      line-height: 1.35;
+    }
+    .card-meta {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      font-size: 13px;
+      color: #42526E;
+      font-weight: 600;
+    }
+    .meta-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    /* Dragging active card */
+    #s2-drag-card {
+      position: absolute;
+      left: 494px;
+      top: 128px;
+      width: 378px;
+      z-index: 100;
+      background: #FFFFFF;
+      border-radius: 8px;
+      padding: 14px 16px;
+      box-shadow: 0 20px 45px rgba(9, 30, 66, 0.35), 0 0 1px rgba(9, 30, 66, 0.3);
+      border: 1px solid #0052CC;
+    }
+
+    /* Target Drop Placeholder */
+    .drop-placeholder {
+      border: 2px dashed #0052CC;
+      background: rgba(0, 82, 204, 0.08);
+      border-radius: 8px;
+      height: 98px;
+    }
+
+    /* Overlay Announcement Banner */
+    .feature-banner {
+      position: absolute;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(9, 30, 66, 0.95);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 9999px;
+      padding: 12px 28px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      color: #ffffff;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+      z-index: 80;
+    }
+    .feature-badge {
+      background: #00875A;
+      color: #ffffff;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 6px;
+    }
+    .feature-text {
+      font-size: 18px;
+      font-weight: 600;
+    }
+
+    /* Realistic Cursor */
+    #s2-cursor {
+      position: absolute;
+      left: 0;
+      top: 0;
+      z-index: 150;
+      pointer-events: none;
+      filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.4));
+    }
+  </style>
+
+  <div id="root" data-composition-id="scene2" data-start="0" data-duration="6.5" data-width="1920" data-height="1080">
+    <!-- Header -->
+    <div id="s2-header" class="board-header clip" data-layout-ignore data-start="0" data-duration="6.5">
+      <div class="board-title-group">
+        <span class="board-title">Sprint 42 · Core Features</span>
+        <span class="board-badge">Milo Board</span>
+      </div>
+      <div class="hud-metrics">
+        <div id="s2-hud-calc" class="metric-pill">
+          <span>SPACED RANKING: 1000 INTERVALS</span>
+        </div>
+        <div class="metric-pill">
+          <span style="color:#00875A">●</span>
+          <span>60 FPS DRAG & DROP</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Board Canvas with 4 Columns -->
+    <div id="s2-canvas" class="board-canvas clip" data-layout-ignore data-start="0" data-duration="6.5">
+      <!-- Col 1: To Do -->
+      <div class="kanban-col">
+        <div class="col-header">
+          <span class="col-title">To Do</span>
+          <span class="col-count">2</span>
+        </div>
+        <div class="card-item">
+          <div class="label-row"><span class="label-tag tag-blue">Design</span></div>
+          <div class="card-text">Audit Atlassian Design tokens across cards</div>
+          <div class="card-meta"><span>📅 Oct 28</span><span>☑ 0/4</span></div>
+        </div>
+        <div class="card-item">
+          <div class="label-row"><span class="label-tag tag-purple">Infra</span></div>
+          <div class="card-text">Configure ephemeral SQLite database migrations</div>
+          <div class="card-meta"><span>📅 Nov 2</span><span>☑ 1/2</span></div>
+        </div>
+      </div>
+
+      <!-- Col 2: In Progress -->
+      <div id="s2-col-inprogress" class="kanban-col">
+        <div class="col-header">
+          <span class="col-title">In Progress</span>
+          <span class="col-count">1</span>
+        </div>
+        <!-- Card 1 (original position before drag) -->
+        <div id="s2-card-static" class="card-item" style="opacity: 0;">
+          <div class="label-row">
+            <span class="label-tag tag-green">Feature</span>
+            <span class="label-tag tag-red">High Priority</span>
+          </div>
+          <div class="card-text">Implement optimistic UI updates with Server Actions</div>
+          <div class="card-meta">
+            <span class="meta-badge" style="color: #DE350B;">⚠ Oct 24</span>
+            <span class="meta-badge">☑ 2/3 (67%)</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Col 3: Code Review -->
+      <div class="kanban-col">
+        <div class="col-header">
+          <span class="col-title">Code Review</span>
+          <span class="col-count">1</span>
+        </div>
+        <div class="card-item">
+          <div class="label-row"><span class="label-tag tag-green">Feature</span></div>
+          <div class="card-text">Strict Result&lt;T, E&gt; error handling pattern</div>
+          <div class="card-meta"><span>📅 Oct 23</span><span>☑ 3/3</span></div>
+        </div>
+      </div>
+
+      <!-- Col 4: Done -->
+      <div id="s2-col-done" class="kanban-col">
+        <div class="col-header">
+          <span class="col-title">Done</span>
+          <span class="col-count">3</span>
+        </div>
+        <div class="card-item">
+          <div class="label-row"><span class="label-tag tag-green">Done</span></div>
+          <div class="card-text">Zero monolithic barrel imports verification</div>
+          <div class="card-meta"><span>✓ Completed</span></div>
+        </div>
+
+        <!-- Target Drop Placeholder (animates height) -->
+        <div id="s2-placeholder" class="drop-placeholder" style="opacity: 0; display: none;"></div>
+
+        <!-- Landed Card in Done -->
+        <div id="s2-landed-card" class="card-item" style="opacity: 0; display: none;">
+          <div class="label-row">
+            <span class="label-tag tag-green">Feature</span>
+            <span class="label-tag tag-red">High Priority</span>
+          </div>
+          <div class="card-text">Implement optimistic UI updates with Server Actions</div>
+          <div class="card-meta">
+            <span class="meta-badge" style="color: #00875A;">✓ Synced (14ms)</span>
+            <span class="meta-badge">☑ 2/3</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Dragging Active Card -->
+    <div id="s2-drag-card" class="clip" data-layout-allow-overlap data-layout-ignore data-start="0" data-duration="6.5">
+      <div class="label-row">
+        <span class="label-tag tag-green">Feature</span>
+        <span class="label-tag tag-red">High Priority</span>
+      </div>
+      <div class="card-text">Implement optimistic UI updates with Server Actions</div>
+      <div class="card-meta">
+        <span class="meta-badge" style="color: #DE350B;">⚠ Oct 24</span>
+        <span class="meta-badge">☑ 2/3 (67%)</span>
+      </div>
+    </div>
+
+    <!-- Mouse Cursor -->
+    <div id="s2-cursor" class="clip" data-start="0" data-duration="6.5">
+      <svg width="44" height="44" viewBox="0 0 32 32" fill="none">
+        <path d="M7 2L24 19L16.5 19.5L20 28L16 29.5L12.5 21L7 26.5V2Z" fill="#172B4D" stroke="#FFFFFF" stroke-width="2.5" stroke-linejoin="round" />
+      </svg>
+    </div>
+
+    <!-- Feature Pill Announcement -->
+    <div id="s2-banner" class="feature-banner clip" data-layout-ignore data-start="0" data-duration="6.5">
+      <span class="feature-badge">60 FPS TACTILE</span>
+      <span class="feature-text">Optimistic UI + Background Server Actions + Spaced Math</span>
+    </div>
+  </div>
+
+  <script>
+    const tl = gsap.timeline({ paused: true });
+
+    // Initial positioning via transforms
+    gsap.set("#s2-drag-card", { x: 0, y: 0, opacity: 1, rotate: 0, scale: 1 });
+    gsap.set("#s2-cursor", { x: 900, y: 800, opacity: 0 });
+    gsap.set("#s2-banner", { opacity: 0, y: 30 });
+
+    // Header & canvas entrance
+    tl.fromTo(
+      "#s2-header",
+      { opacity: 0, y: -30 },
+      { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" },
+      0.1
+    );
+
+    tl.fromTo(
+      ".kanban-col",
+      { opacity: 0, y: 40 },
+      { opacity: 1, y: 0, stagger: 0.08, duration: 0.6, ease: "power3.out" },
+      0.2
+    );
+
+    // Cursor flies in to grab the card (target x: 620, y: 170)
+    tl.fromTo(
+      "#s2-cursor",
+      { opacity: 0, x: 750, y: 500 },
+      { opacity: 1, x: 620, y: 170, duration: 0.9, ease: "power3.out" },
+      0.6
+    );
+
+    // Tactile pickup feel: card lifts, rotates 3deg, shadow expands
+    tl.to(
+      "#s2-drag-card",
+      { scale: 1.05, rotate: 3.5, boxShadow: "0 28px 60px rgba(9,30,66,0.45)", duration: 0.25, ease: "power2.out" },
+      1.6
+    );
+    tl.to("#s2-cursor", { scale: 0.9, duration: 0.15, yoyo: true, repeat: 1 }, 1.6);
+
+    // Placeholder appears in Done column
+    tl.set("#s2-placeholder", { display: "block" }, 2.0);
+    tl.to("#s2-placeholder", { opacity: 0.9, duration: 0.3 }, 2.0);
+
+    // Drag move from Col 2 to Col 4 (delta x: 876, delta y: 108)
+    tl.to(
+      "#s2-drag-card",
+      { x: 876, y: 108, duration: 1.4, ease: "power2.inOut" },
+      1.85
+    );
+    tl.to(
+      "#s2-cursor",
+      { x: 1490, y: 280, duration: 1.4, ease: "power2.inOut" },
+      1.85
+    );
+
+    // Update HUD metrics during drag
+    tl.to(
+      "#s2-hud-calc",
+      { background: "#0052CC", color: "#FFFFFF", borderColor: "#388BFF", duration: 0.3 },
+      2.5
+    );
+
+    // Card drops into placeholder
+    tl.to(
+      "#s2-drag-card",
+      { scale: 1, rotate: 0, y: 114, duration: 0.25, ease: "bounce.out" },
+      3.25
+    );
+    tl.to("#s2-cursor", { scale: 1, duration: 0.15 }, 3.25);
+
+    // Banner pops up
+    tl.to(
+      "#s2-banner",
+      { opacity: 1, y: 0, duration: 0.5, ease: "back.out(1.7)" },
+      3.4
+    );
+
+    // Cursor moves away
+    tl.to(
+      "#s2-cursor",
+      { x: 1750, y: 400, opacity: 0.6, duration: 1.2, ease: "power3.inOut" },
+      3.6
+    );
+
+    // Camera zooms gently into Done column payoff
+    tl.to(
+      "#s2-canvas",
+      { scale: 1.04, x: -80, duration: 2.0, ease: "power1.out" },
+      4.0
+    );
+
+    // Scene exit transition
+    tl.to(
+      "#root",
+      { opacity: 0, duration: 0.45, ease: "power2.in" },
+      6.05
+    );
+
+    window.__timelines["scene2"] = tl;
+  </script>
+</template>

@@ -31,3 +31,6 @@ Milo is a modular, single-binary, full-stack Next.js application designed with V
    - All drag-and-drop index calculations reside in `src/shared/calc/reorder.calc.ts`.
 3. **Structured Errors (`Result<T, E>`)**:
    - No untyped thrown errors. All operations return `Result.success(data)` or `Result.failure(code, message)`.
+
+## 3. Interactive State & Concurrency Model
+For a complete state transition chart covering optimistic drag-and-drop, concurrency invariants, race condition edge cases, and failure recovery states, consult [`docs/STATE_CHART.md`](./STATE_CHART.md).

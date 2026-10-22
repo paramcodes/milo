@@ -1,140 +1,65 @@
-# Implementation Plan: Milo Boards (Tactile Trello Clone MVP)
+# Implementation Plan: TLA+-Verified Defensive Concurrency & Optimistic Rollback
 
 ## Overview
-Build Milo, a fast, tactile web-based Kanban board application replicating Trello's core UX using Atlassian Design System tokens. The application enables users to manage Boards, Lists, and Cards with fluid drag-and-drop interactions, optimistic updates, rich card details (labels, checklists, due dates, activity audit log), and zero-mock SQLite testing under strict architectural boundaries (no barrel files, no `utils.ts`, no UI in server layers, max 400 LOC per file).
+Implement the defensive concurrency and consistency invariants formally verified by TLA+ and specified in `docs/STATE_CHART.md`. The plan addresses the high-concurrency bugs found by TLC:
+1. **Card Position Collisions**: Moving cards within or between lists in SQLite causes duplicate positions when only the moved card is updated.
+2. **Unhandled Target List Deletion**: Moving cards into a deleted list causes SQLite foreign key exceptions instead of clean `Result.failure('LIST_NOT_FOUND')`.
+3. **Optimistic Desync Without Rollback**: On server rejection or network drop, the client UI keeps cards in the wrong/deleted list indefinitely.
+4. **Out-of-Order Stale Reversion**: Rapid successive drags trigger out-of-order server responses, causing UI flicker and stale position overwrites.
 
-## Architecture Decisions
-- **Next.js App Router & Server Actions**: Internal mutations run via Server Actions in `<domain>.api.ts` validating inputs with Zod schemas from `<domain>.schema.ts`, bypassing manual REST routing and enabling seamless optimistic UI (`useOptimistic`). (ADR 002)
-- **Zero Barrel Files**: Root `index.ts` files are strictly banned to prevent circular dependencies, bundle bloat, and slow builds. Direct subpath imports used exclusively (e.g. `@/shared/kernel/result`). (ADR 001)
-- **Zero-Mock Ephemeral SQLite Testing**: Integration tests run against an ephemeral SQLite database (`file:test.db`) with real foreign key cascades and transactions, avoiding mock drift. (ADR 003)
-- **Repo/Service Split**: In every feature slice (`src/features/<domain>/`), business rules reside in `<domain>.service.ts` returning typed `Result<T, E>`, while Prisma database queries reside in `<domain>.repo.ts`. (ADR 004)
-- **Pure Math Isolation**: Card and list reordering arithmetic is isolated in pure function `src/shared/calc/reorder.calc.ts` using spaced integer positions (multiples of 1000).
-- **Mechanical Guardrails**: AST boundary scanner (`bun run check:arch`) and file size limiter (`bun run check:size`) prevent architecture erosion and god-files.
+All implementations strictly adhere to Milo's architectural rules: vertical feature slices, `Result<T, E>` return discipline, pure calculation in `reorder.calc.ts`, no UI in server layers, max 400 LOC per file, and zero-mock SQLite testing.
+
+---
 
 ## Dependency Graph
+
 ```
-Tooling & Mechanical Guardrails (package.json, tsconfig, biome, scripts)
+Domain Schema & Service Validation (cards.schema.ts, cards.repo.ts, cards.service.ts)
     │
     ▼
-Prisma Schema & Database Client (prisma/schema.prisma, src/server/db/client.ts)
+Colocated Server Integration Tests (cards.service.test.ts)
     │
     ▼
-Shared Kernel, Math & Telemetry (primitives, result, reorder.calc, logger)
+Client Monotonic Transaction Sequencer & Snapshot Rollback (board-canvas.tsx)
     │
     ▼
-Shared UI Primitives & Atlassian Tokens (tokens, cn.util, button, input, dialog)
+Client Component Verification Tests (board-canvas.test.tsx)
     │
     ▼
-Feature: Auth & Sessions (crypto session, user repo/service/actions, login/register UI)
-    │
-    ▼
-Feature: Boards & Workspace (boards repo/service/actions, dashboard grid, board header)
-    │
-    ▼
-Feature: Lists & Columns (lists repo/service/actions, list column, add-list input)
-    │
-    ▼
-Feature: Cards Core (cards repo/service/actions, card tile, add-card input)
-    │
-    ▼
-Feature: Drag-and-Drop Board Canvas (@hello-pangea/dnd, board canvas, optimistic sync)
-    │
-    ▼
-Feature: Card Details Modal (dialog, checklist, labels, due dates, presenter)
-    │
-    ▼
-Feature: Activity Audit Stream (transaction logging, activity feed component)
-    │
-    ▼
-Seeding & Final Verification (prisma/seed.ts, check:arch, check:size, tests)
+Full Mechanical & Architectural Verification Suite (check:arch, check:size, check, knip, test)
 ```
 
-## Task List
+---
 
-### Phase 1: Foundation & Guardrails
-- [x] Task 1: Project Setup, Config & Mechanical Guardrails (`package.json`, `tsconfig.json`, `biome.json`, `scripts/`)
-- [x] Task 2: Database Schema & Client (`prisma/schema.prisma`, `src/server/db/client.ts`)
-- [x] Task 3: Shared Kernel, Calculation Math & Telemetry (`src/shared/kernel/`, `src/shared/calc/`, `src/shared/telemetry/`)
-- [x] Task 4: Shared UI Primitives & Atlassian Design Tokens (`src/shared/ui/`)
+## Vertical Slices
 
-### Checkpoint: Foundation & Guardrails
-- [x] TypeScript compiles cleanly
-- [x] Unit tests for `reorder.calc` and UI primitives pass
-- [x] Architectural linter and file size guard execute cleanly
+### Phase 1: Server-Side Transactional Positioning & List Invariants
+- **Task 1**: Target List Validation & Error Contract (`src/features/cards/cards.service.ts`, `src/features/cards/cards.schema.ts`)
+- **Task 2**: Transactional List Reorder & Position Collision Elimination (`src/features/cards/cards.repo.ts`, `src/features/cards/cards.service.ts`)
+- **Task 3**: Zero-Mock SQLite Concurrency & Error Tests (`src/features/cards/cards.service.test.ts`)
 
-### Phase 2: Authentication & Session Management (Vertical Slice)
-- [x] Task 5: Server Auth Crypto & Session Engine (`src/server/auth/session.ts`, `session.test.ts`)
-- [x] Task 6: Auth Domain Backend & Verification (`src/features/auth/auth.{schema,repo,service}.ts`)
-- [x] Task 7: Auth Server Actions & Authentication UI (`src/features/auth/auth.api.ts`, login/register pages)
+### Checkpoint: Server Invariants Verified
+- [ ] All `cards.service.test.ts` pass with zero mocks against SQLite
+- [ ] Position collisions are impossible; destination lists verified before mutation
 
-### Checkpoint: Authentication
-- [x] User registration, login, and cookie session roundtrip verified in tests
-- [x] Protected dashboard route redirects unauthenticated requests
+### Phase 2: Client Monotonic Sequencing & Optimistic Rollback
+- **Task 4**: Monotonic Transaction Sequencing in Board Canvas (`src/features/boards/components/board-canvas.tsx`)
+- **Task 5**: Defensive Snapshot Rollback on Server Rejection (`src/features/boards/components/board-canvas.tsx`)
+- **Task 6**: Client Concurrency & Rollback Unit Tests (`src/features/boards/components/board-canvas.test.tsx`)
 
-### Phase 3: Boards & Workspace Dashboard (Vertical Slice)
-- [x] Task 8: Boards Domain Backend (`src/features/boards/boards.{schema,repo,service}.ts`)
-- [x] Task 9: Boards Server Actions & Dashboard Shell (`src/features/boards/boards.api.ts`, dashboard components)
+### Checkpoint: Client Concurrency Verified
+- [ ] `board-canvas.test.tsx` proves optimistic update rollbacks upon server failure
+- [ ] Stale out-of-order server action responses are dropped
 
-### Checkpoint: Boards & Dashboard
-- [x] User can create, list, and view boards
-- [x] Board access restrictions enforced by workspace/user ownership
+### Phase 3: System Verification & Guardrail Audit
+- **Task 7**: Mechanical Guardrail & Full Test Suite Pass (`bun run check:arch`, `bun run check:size`, `bun run check`, `bun x tsc --noEmit`, `bun run knip`, `bun run test`)
 
-### Phase 4: Lists & Column Management (Vertical Slice)
-- [x] Task 10: Lists Domain Backend (`src/features/lists/lists.{schema,repo,service}.ts`)
-- [x] Task 11: Lists Server Actions & Column Components (`src/features/lists/lists.api.ts`, list components)
-
-### Checkpoint: Lists Management
-- [x] Lists can be added, updated inline, and deleted with cascading card removal
-
-### Phase 5: Cards Core & Quick Add (Vertical Slice)
-- [x] Task 12: Cards Domain Backend (`src/features/cards/cards.{schema,repo,service}.ts`)
-- [x] Task 13: Cards Server Actions & Card Tile Components (`src/features/cards/cards.api.ts`, card components)
-
-### Checkpoint: Cards Management
-- [x] Cards can be added inline to lists and rendered as tactile tiles
-
-### Phase 6: Interactive Drag-and-Drop Board Canvas (Vertical Slice)
-- [x] Task 14: DnD Context & Board Canvas Integration (`@hello-pangea/dnd`, optimistic updates, board route)
-
-### Checkpoint: Board Canvas & DnD
-- [x] Fluid drag-and-drop within and between lists with instant optimistic feedback
-- [x] Positions persisted to SQLite database with spaced ranking (multiples of 1000)
-
-### Phase 7: Card Details Modal — Labels, Checklists, Due Dates (Vertical Slice)
-- [x] Task 15: Card Presenter & Modal Dialog Structure (`cards.presenter.ts`, `card-modal.tsx`)
-- [x] Task 16: Checklist Items, Label Picker & Due Date Components (interactive checklist, color chips, due date badge)
-
-### Checkpoint: Card Details Modal
-- [x] Card modal opens on card click; displays and mutates description, checklists, labels, and due dates
-- [x] Presenter calculates completion percentage and overdue/due-soon status correctly
-
-### Phase 8: Audit Trail & Activity Logging (Vertical Slice)
-- [x] Task 17: Activity Stream & Audit Logging Integration (ActivityLog entries, feed component in modal)
-
-### Checkpoint: Audit Trail
-- [x] All card state changes (move, title edit, checklist toggle) record immutable activity entries
-- [x] Activity stream displays chronological audit history in the card modal
-
-### Phase 9: Seeding, Verification & Final Polish
-- [x] Task 18: Demo Seed Script (`prisma/seed.ts` for instant "Sprint Planning" testing)
-- [x] Task 19: Full Suite Verification & Mechanical Guardrail Pass (all verification commands green)
-
-### Checkpoint: Release Ready
-- [x] Zero TypeScript errors (`tsrs` / `bun x tsc --noEmit`)
-- [x] Zero Biome lint/formatting errors (`bun run check`)
-- [x] Zero architectural violations (`bun run check:arch`)
-- [x] Zero files > 400 LOC (`bun run check:size`)
-- [x] Zero dead code / unused exports (`bun run knip`)
-- [x] 100% tests passing (`bun run test`)
-- [x] Seed script executes cleanly (`bun run seed`)
+---
 
 ## Risks and Mitigations
-| Risk | Impact | Mitigation |
-|------|--------|------------|
-| `@hello-pangea/dnd` React 18/19 hydration warnings | Med | Encapsulate drag drop in a dedicated client component with proper mounting checks (`dnd-context.tsx`). |
-| Optimistic state desync on network failure | Med | Implement snapshot rollback in client state when Server Action returns an error `Result`. |
-| Complex SQLite transactions in zero-mock tests | Low | Ephemeral test database created per test suite run using `file:test.db` with automated schema migrations. |
-| File size violations (>400 LOC) on rich components | Med | Decompose card modal and canvas into focused subcomponents (`checklist.tsx`, `label-picker.tsx`, `activity-stream.tsx`). |
 
-## Open Questions
-- None. Requirements, database schema, design tokens, and architectural boundaries are fully specified in `SPEC.md`, `docs/ARCHITECTURE.md`, `docs/DB_SCHEMA.md`, and `docs/ADR/`.
+| Risk | Impact | Mitigation |
+|---|---|---|
+| Large transaction payload when moving cards | Low | Lists in Milo typically contain 5-50 cards; bulk position updates in SQLite complete in <2ms. |
+| React 19 `useTransition` interacting with optimistic rollback | Med | Store pre-drag snapshot in a mutable ref or functional state update before dispatching the transition. |
+| File size violation on `board-canvas.tsx` (>400 LOC) | Med | `board-canvas.tsx` is currently ~230 LOC. Keep changes modular (<70 LOC addition) to remain well below the 400 LOC ceiling. |

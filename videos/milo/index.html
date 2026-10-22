@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <title>Milo Boards — Product Launch Video</title>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+      :root {
+        --ground: #091e42;
+        --ink: #ffffff;
+        --font-display: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        background: var(--ground);
+      }
+      #root {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        font-family: var(--font-display);
+      }
+      .scene-host {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      id="root"
+      data-composition-id="main"
+      data-start="0"
+      data-duration="31"
+      data-width="1920"
+      data-height="1080"
+    >
+      <!-- Scene 1: The Hook (0s - 5.5s) -->
+      <div
+        id="scene1"
+        class="clip scene-host"
+        data-composition-id="scene1"
+        data-composition-src="compositions/scene1.html"
+        data-track-kind="graphics"
+        data-track-index="1"
+        data-start="0"
+        data-duration="5.5"
+        data-width="1920"
+        data-height="1080"
+      ></div>
+
+      <!-- Scene 2: 60fps Drag & Drop (5.5s - 12.0s) -->
+      <div
+        id="scene2"
+        class="clip scene-host"
+        data-composition-id="scene2"
+        data-composition-src="compositions/scene2.html"
+        data-track-kind="graphics"
+        data-track-index="1"
+        data-start="5.5"
+        data-duration="6.5"
+        data-width="1920"
+        data-height="1080"
+      ></div>
+
+      <!-- Scene 3: Rich Card Details Modal (12.0s - 19.0s) -->
+      <div
+        id="scene3"
+        class="clip scene-host"
+        data-composition-id="scene3"
+        data-composition-src="compositions/scene3.html"
+        data-track-kind="graphics"
+        data-track-index="1"
+        data-start="12.0"
+        data-duration="7.0"
+        data-width="1920"
+        data-height="1080"
+      ></div>
+
+      <!-- Scene 4: Agent-Verifiable Architecture (19.0s - 25.5s) -->
+      <div
+        id="scene4"
+        class="clip scene-host"
+        data-composition-id="scene4"
+        data-composition-src="compositions/scene4.html"
+        data-track-kind="graphics"
+        data-track-index="1"
+        data-start="19.0"
+        data-duration="6.5"
+        data-width="1920"
+        data-height="1080"
+      ></div>
+
+      <!-- Scene 5: Payoff & Call to Action (25.5s - 31.0s) -->
+      <div
+        id="scene5"
+        class="clip scene-host"
+        data-composition-id="scene5"
+        data-composition-src="compositions/scene5.html"
+        data-track-kind="graphics"
+        data-track-index="1"
+        data-start="25.5"
+        data-duration="5.5"
+        data-width="1920"
+        data-height="1080"
+      ></div>
+
+      <!-- Audio: Ambient Background Bed -->
+      <audio
+        id="bgm"
+        class="clip"
+        src="assets/audio/ambient-bed.wav"
+        data-start="0"
+        data-duration="31"
+        data-volume="0.12"
+        data-fade-in="1.2"
+        data-fade-out="2.0"
+      ></audio>
+
+      <!-- Audio: Scene Voiceovers -->
+      <audio
+        id="voice1"
+        class="clip"
+        src="assets/audio/voice-scene1.wav"
+        data-start="0.3"
+        data-duration="5.2"
+        data-volume="0.95"
+      ></audio>
+
+      <audio
+        id="voice2"
+        class="clip"
+        src="assets/audio/voice-scene2.wav"
+        data-start="5.7"
+        data-duration="6.3"
+        data-volume="0.95"
+      ></audio>
+
+      <audio
+        id="voice3"
+        class="clip"
+        src="assets/audio/voice-scene3.wav"
+        data-start="12.2"
+        data-duration="6.8"
+        data-volume="0.95"
+      ></audio>
+
+      <audio
+        id="voice4"
+        class="clip"
+        src="assets/audio/voice-scene4.wav"
+        data-start="19.2"
+        data-duration="6.0"
+        data-volume="0.95"
+      ></audio>
+
+      <audio
+        id="voice5"
+        class="clip"
+        src="assets/audio/voice-scene5.wav"
+        data-start="25.7"
+        data-duration="4.5"
+        data-volume="0.95"
+      ></audio>
+    </div>
+
+    <script>
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+      window.__timelines["main"] = tl;
+      tl.seek(0);
+    </script>
+  </body>
+</html>

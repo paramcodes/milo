@@ -1,0 +1,481 @@
+<template>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    #root {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: #091e42;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: #172B4D;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .modal-backdrop-img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: blur(14px) brightness(0.45);
+      transform: scale(1.08);
+    }
+    .modal-container {
+      position: relative;
+      z-index: 10;
+      width: 1180px;
+      background: #F4F5F7;
+      border-radius: 14px;
+      box-shadow: 0 35px 90px rgba(0, 0, 0, 0.65), 0 0 1px rgba(9, 30, 66, 0.4);
+      padding: 36px 44px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+    .modal-header {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+    .modal-icon {
+      width: 32px;
+      height: 32px;
+      color: #42526E;
+      margin-top: 4px;
+      flex-shrink: 0;
+    }
+    .modal-title-area {
+      flex: 1;
+    }
+    .modal-card-title {
+      font-size: 28px;
+      font-weight: 700;
+      color: #172B4D;
+      line-height: 1.25;
+      letter-spacing: -0.02em;
+    }
+    .modal-subtitle {
+      font-size: 15px;
+      color: #42526E;
+      margin-top: 4px;
+    }
+    .modal-subtitle strong {
+      color: #172B4D;
+      text-decoration: underline;
+    }
+
+    .modal-body {
+      display: grid;
+      grid-template-columns: 1fr 340px;
+      gap: 36px;
+    }
+    .main-column {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+    .side-column {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    /* Labels & Due date bar */
+    .meta-row {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+    .meta-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .meta-label {
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: #42526E;
+    }
+    .labels-list {
+      display: flex;
+      gap: 8px;
+    }
+    .pill-tag {
+      font-size: 13px;
+      font-weight: 700;
+      padding: 5px 14px;
+      border-radius: 4px;
+      color: #FFFFFF;
+    }
+    .due-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 14px;
+      font-weight: 600;
+      background: #E3FCEF;
+      color: #006644;
+      border: 1px solid #ABF5D1;
+    }
+
+    /* Checklist Section */
+    .checklist-card {
+      background: #FFFFFF;
+      border-radius: 10px;
+      padding: 24px;
+      box-shadow: 0 1px 3px rgba(9, 30, 66, 0.1);
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .checklist-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .section-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: #172B4D;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .progress-counter {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 15px;
+      font-weight: 700;
+      color: #0052CC;
+    }
+    .progress-track {
+      width: 100%;
+      height: 10px;
+      background: #EBECF0;
+      border-radius: 9999px;
+      overflow: hidden;
+      position: relative;
+    }
+    #s3-progress-fill {
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 67%;
+      background: #0052CC;
+      border-radius: 9999px;
+    }
+
+    .check-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 8px 10px;
+      border-radius: 6px;
+      font-size: 16px;
+      color: #172B4D;
+      font-weight: 500;
+    }
+    .checkbox-box {
+      width: 22px;
+      height: 22px;
+      border-radius: 5px;
+      border: 2px solid #6B778C;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      background: #FFFFFF;
+    }
+    .checkbox-box.checked {
+      background: #00875A;
+      border-color: #00875A;
+      color: #FFFFFF;
+    }
+    .check-text.striked {
+      text-decoration: line-through;
+      color: #6B778C;
+    }
+
+    /* Activity Stream / Audit Trail */
+    .activity-section {
+      background: #FFFFFF;
+      border-radius: 10px;
+      padding: 22px;
+      box-shadow: 0 1px 3px rgba(9, 30, 66, 0.1);
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .activity-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #172B4D;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .immutable-badge {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      padding: 2px 8px;
+      border-radius: 4px;
+      background: #EAE6FF;
+      color: #403294;
+    }
+    .activity-feed {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      font-size: 14px;
+      color: #42526E;
+    }
+    .activity-item {
+      display: flex;
+      gap: 10px;
+      line-height: 1.35;
+    }
+    .avatar-dot {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: #0052CC;
+      color: #FFFFFF;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 11px;
+      flex-shrink: 0;
+    }
+    .activity-time {
+      color: #42526E;
+      font-size: 12px;
+      margin-top: 2px;
+    }
+
+    /* Floating Cursor */
+    #s3-cursor {
+      position: absolute;
+      left: 0;
+      top: 0;
+      z-index: 100;
+      pointer-events: none;
+      filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.4));
+    }
+  </style>
+
+  <div id="root" data-composition-id="scene3" data-start="0" data-duration="7.0" data-width="1920" data-height="1080">
+    <img id="s3-bg" class="modal-backdrop-img clip" data-layout-allow-overflow data-start="0" data-duration="7.0" src="assets/board-canvas.png" alt="Board Blur" />
+
+    <div id="s3-modal" class="modal-container clip" data-layout-ignore data-start="0" data-duration="7.0">
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <svg class="modal-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="3" y="3" width="18" height="18" rx="2" />
+          <path d="M7 7h10M7 12h10M7 17h6" />
+        </svg>
+        <div class="modal-title-area">
+          <h2 class="modal-card-title">Implement optimistic UI updates with Server Actions</h2>
+          <p class="modal-subtitle">in list <strong>Done</strong> · Spaced ranking: <strong>#1500</strong></p>
+        </div>
+      </div>
+
+      <!-- Modal Body -->
+      <div class="modal-body">
+        <!-- Main Left Column -->
+        <div class="main-column">
+          <!-- Meta Tags Row -->
+          <div class="meta-row">
+            <div class="meta-group">
+              <span class="meta-label">Labels</span>
+              <div class="labels-list">
+                <span class="pill-tag" style="background:#00875A">Feature</span>
+                <span class="pill-tag" style="background:#BF2600">High Priority</span>
+                <span class="pill-tag" style="background:#0747A6">Architecture</span>
+              </div>
+            </div>
+            <div class="meta-group">
+              <span class="meta-label">Due Date</span>
+              <span id="s3-due-badge" class="due-badge">
+                <span>✓ Oct 24 (Complete)</span>
+              </span>
+            </div>
+          </div>
+
+          <!-- Interactive Checklist -->
+          <div class="checklist-card">
+            <div class="checklist-header">
+              <span class="section-title">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                  <path d="M9 11l3 3L22 4" /><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" />
+                </svg>
+                Checklist
+              </span>
+              <span id="s3-counter-text" class="progress-counter">2/3 (67%)</span>
+            </div>
+
+            <!-- Progress Bar -->
+            <div class="progress-track">
+              <div id="s3-progress-fill"></div>
+            </div>
+
+            <!-- Checklist Items -->
+            <div class="check-item">
+              <div class="checkbox-box checked">✓</div>
+              <span class="check-text striked">Wire up @hello-pangea/dnd cross-column drop handler</span>
+            </div>
+            <div class="check-item">
+              <div class="checkbox-box checked">✓</div>
+              <span class="check-text striked">Pure position reordering math (src/shared/calc/reorder.calc.ts)</span>
+            </div>
+            <div id="s3-target-item" class="check-item">
+              <div id="s3-target-box" class="checkbox-box"></div>
+              <span id="s3-target-text" class="check-text">Validate with zero-mock SQLite integration tests</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Side: Activity Audit Stream -->
+        <div class="side-column">
+          <div class="activity-section">
+            <div class="activity-title">
+              <span>Activity</span>
+              <span class="immutable-badge">AUDIT TRAIL</span>
+            </div>
+
+            <div class="activity-feed">
+              <!-- New dynamically revealed activity -->
+              <div id="s3-new-activity" class="activity-item" style="opacity: 0; display: none;">
+                <div class="avatar-dot" style="background:#00875A">P</div>
+                <div>
+                  <strong>Param</strong> checked off <em>Validate with zero-mock SQLite</em>
+                  <div class="activity-time">Just now</div>
+                </div>
+              </div>
+
+              <div class="activity-item">
+                <div class="avatar-dot">P</div>
+                <div>
+                  <strong>Param</strong> moved card to <strong>Done</strong>
+                  <div class="activity-time">2m ago</div>
+                </div>
+              </div>
+
+              <div class="activity-item">
+                <div class="avatar-dot">P</div>
+                <div>
+                  <strong>Param</strong> updated spaced ranking to #1500
+                  <div class="activity-time">5m ago</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mouse Cursor -->
+    <div id="s3-cursor" class="clip" data-start="0" data-duration="7.0">
+      <svg width="44" height="44" viewBox="0 0 32 32" fill="none">
+        <path d="M7 2L24 19L16.5 19.5L20 28L16 29.5L12.5 21L7 26.5V2Z" fill="#172B4D" stroke="#FFFFFF" stroke-width="2.5" stroke-linejoin="round" />
+      </svg>
+    </div>
+  </div>
+
+  <script>
+    const tl = gsap.timeline({ paused: true });
+
+    // Initial state
+    gsap.set("#s3-modal", { scale: 0.9, opacity: 0, y: 30 });
+    gsap.set("#s3-cursor", { x: 950, y: 850, opacity: 0 });
+
+    // Modal Entrance
+    tl.fromTo(
+      "#s3-modal",
+      { scale: 0.9, opacity: 0, y: 40 },
+      { scale: 1, opacity: 1, y: 0, duration: 0.7, ease: "back.out(1.2)" },
+      0.1
+    );
+
+    // Cursor flies toward target checklist item
+    tl.fromTo(
+      "#s3-cursor",
+      { opacity: 0, x: 1100, y: 750 },
+      { opacity: 1, x: 472, y: 546, duration: 1.1, ease: "power3.out" },
+      0.8
+    );
+
+    // Cursor clicks checkbox
+    tl.to("#s3-cursor", { scale: 0.85, duration: 0.12, yoyo: true, repeat: 1 }, 2.0);
+
+    // Checkbox toggles to checked
+    tl.call(() => {
+      const box = document.getElementById("s3-target-box");
+      const text = document.getElementById("s3-target-text");
+      if (box && text) {
+        box.classList.add("checked");
+        box.innerText = "✓";
+        text.classList.add("striked");
+      }
+    }, null, 2.15);
+
+    // Progress bar fills from 67% to 100% and turns Atlassian Green
+    tl.to(
+      "#s3-progress-fill",
+      { width: "100%", background: "#00875A", duration: 0.8, ease: "power2.out" },
+      2.15
+    );
+
+    // Counter text updates to 100%
+    tl.call(() => {
+      const counter = document.getElementById("s3-counter-text");
+      if (counter) {
+        counter.innerText = "3/3 (100%)";
+        counter.style.color = "#00875A";
+      }
+    }, null, 2.5);
+
+    // New Audit Log entry pops in
+    tl.set("#s3-new-activity", { display: "flex" }, 2.8);
+    tl.fromTo(
+      "#s3-new-activity",
+      { opacity: 0, y: -15 },
+      { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" },
+      2.8
+    );
+
+    // Cursor glides away
+    tl.to(
+      "#s3-cursor",
+      { x: 300, y: 700, opacity: 0.4, duration: 1.4, ease: "power2.inOut" },
+      3.2
+    );
+
+    // Modal subtle camera push into audit trail
+    tl.to(
+      "#s3-modal",
+      { scale: 1.03, duration: 2.8, ease: "sine.inOut" },
+      3.5
+    );
+
+    // Exit transition
+    tl.to(
+      "#root",
+      { opacity: 0, duration: 0.45, ease: "power2.in" },
+      6.55
+    );
+
+    window.__timelines["scene3"] = tl;
+  </script>
+</template>

@@ -1,0 +1,188 @@
+<template>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    #root {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: #091e42;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: #ffffff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .grid-bg {
+      position: absolute;
+      inset: 0;
+      background-image: 
+        linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+      background-size: 60px 60px;
+      opacity: 0.6;
+    }
+    .radial-glow {
+      position: absolute;
+      width: 1200px;
+      height: 800px;
+      top: -200px;
+      background: radial-gradient(circle, rgba(0, 82, 204, 0.35) 0%, rgba(9, 30, 66, 0) 70%);
+      pointer-events: none;
+    }
+    .content-wrap {
+      position: relative;
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      max-width: 1400px;
+    }
+    .kicker-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 20px;
+      border-radius: 9999px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #00B8D9;
+      margin-bottom: 28px;
+    }
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #00875A;
+      box-shadow: 0 0 10px #00875A;
+    }
+    .headline {
+      font-size: 82px;
+      font-weight: 800;
+      line-height: 1.05;
+      letter-spacing: -0.04em;
+      margin-bottom: 24px;
+    }
+    .brand-highlight {
+      color: #388BFF;
+      text-shadow: 0 0 35px rgba(0, 101, 255, 0.5);
+    }
+    .subtext {
+      font-size: 28px;
+      font-weight: 400;
+      color: #B3BAC5;
+      max-width: 900px;
+      line-height: 1.4;
+      margin-bottom: 36px;
+    }
+    .preview-card-wrap {
+      position: relative;
+      width: 1020px;
+      height: 380px;
+      perspective: 1200px;
+    }
+    .preview-card {
+      width: 100%;
+      height: 100%;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      box-shadow: 0 30px 90px rgba(0, 0, 0, 0.65), 0 0 40px rgba(0, 82, 204, 0.3);
+      overflow: hidden;
+      background: #0052CC;
+    }
+    .preview-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top center;
+      display: block;
+    }
+  </style>
+
+  <div id="root" data-composition-id="scene1" data-start="0" data-duration="5.5" data-width="1920" data-height="1080">
+    <div id="s1-grid" class="grid-bg clip" data-start="0" data-duration="5.5"></div>
+    <div id="s1-glow" class="radial-glow clip" data-layout-allow-overflow data-start="0" data-duration="5.5"></div>
+
+    <div id="s1-content" class="content-wrap clip" data-start="0" data-duration="5.5">
+      <div id="s1-kicker" class="kicker-pill" data-layout-ignore>
+        <span class="status-dot"></span>
+        <span>ATLASSIAN DESIGN SYSTEM · TACTILE KANBAN · ZERO-MOCK</span>
+      </div>
+
+      <h1 id="s1-title" class="headline">
+        Your boards shouldn't fight you.<br />
+        Meet <span class="brand-highlight">Milo</span>.
+      </h1>
+
+      <p id="s1-subtext" class="subtext">
+        Fluid 60fps drag-and-drop, spaced integer ranking, and agent-verifiable mechanical guardrails.
+      </p>
+
+      <div class="preview-card-wrap">
+        <div id="s1-card" class="preview-card">
+          <img src="assets/board-canvas.png" alt="Milo Kanban Canvas Preview" />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const tl = gsap.timeline({ paused: true });
+
+    // Initial state setup: Title is already visible at t=0 for thumbnail capture!
+    gsap.set("#s1-kicker", { opacity: 1, y: 0, scale: 1 });
+    gsap.set("#s1-title", { opacity: 1, y: 0 });
+    gsap.set("#s1-subtext", { opacity: 0, y: 15 });
+    gsap.set("#s1-card", { opacity: 0, y: 120, rotateX: 15, scale: 0.94 });
+
+    // Kicker subtle glow surge
+    tl.fromTo(
+      "#s1-kicker",
+      { scale: 0.96 },
+      { scale: 1, duration: 0.4, ease: "power2.out" },
+      0.1
+    );
+
+    tl.fromTo(
+      "#s1-subtext",
+      { opacity: 0, y: 15 },
+      { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" },
+      0.4
+    );
+
+    tl.fromTo(
+      "#s1-card",
+      { opacity: 0, y: 120, rotateX: 15, scale: 0.94 },
+      { opacity: 1, y: 0, rotateX: 0, scale: 1, duration: 1.0, ease: "power3.out" },
+      0.8
+    );
+
+    // Subtle drift during hold
+    tl.to(
+      "#s1-card",
+      { y: -12, scale: 1.02, duration: 3.0, ease: "sine.inOut" },
+      1.8
+    );
+
+    // Exit transition into Scene 2
+    tl.to(
+      "#root",
+      { opacity: 0, scale: 1.04, duration: 0.45, ease: "power2.in" },
+      5.05
+    );
+
+    window.__timelines["scene1"] = tl;
+  </script>
+</template>
