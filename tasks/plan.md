@@ -88,10 +88,10 @@ Seeding & Final Verification (prisma/seed.ts, check:arch, check:size, tests)
 
 ### Phase 5: Cards Core & Quick Add (Vertical Slice)
 - [x] Task 12: Cards Domain Backend (`src/features/cards/cards.{schema,repo,service}.ts`)
-- [ ] Task 13: Cards Server Actions & Card Tile Components (`src/features/cards/cards.api.ts`, card components)
+- [x] Task 13: Cards Server Actions & Card Tile Components (`src/features/cards/cards.api.ts`, card components)
 
 ### Checkpoint: Cards Management
-- [ ] Cards can be added inline to lists and rendered as tactile tiles
+- [x] Cards can be added inline to lists and rendered as tactile tiles
 
 ### Phase 6: Interactive Drag-and-Drop Board Canvas (Vertical Slice)
 - [ ] Task 14: DnD Context & Board Canvas Integration (`@hello-pangea/dnd`, optimistic updates, board route)

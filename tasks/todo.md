@@ -359,14 +359,14 @@
 **Description:** Implement Server Actions for cards and the draggable card preview tile and quick-add input.
 
 **Acceptance criteria:**
-- [ ] `src/features/cards/cards.api.ts` exports `createCardAction`, `updateCardAction`, and `deleteCardAction`.
-- [ ] `src/features/cards/components/card-tile.tsx` renders card preview tile with title, label chips, and indicator badges.
-- [ ] `src/features/cards/components/add-card-input.tsx` renders inline quick-add card textarea at the bottom of a list.
+- [x] `src/features/cards/cards.api.ts` exports `createCardAction`, `updateCardAction`, and `deleteCardAction`.
+- [x] `src/features/cards/components/card-tile.tsx` renders card preview tile with title, label chips, and indicator badges.
+- [x] `src/features/cards/components/add-card-input.tsx` renders inline quick-add card textarea at the bottom of a list.
 
 **Verification:**
-- [ ] Tests pass: `bun run check:arch` passes
-- [ ] Build succeeds: `bun x tsc --noEmit`
-- [ ] Manual check: Pressing Enter or clicking Add creates a card immediately
+- [x] Tests pass: `bun run check:arch` passes
+- [x] Build succeeds: `bun x tsc --noEmit`
+- [x] Manual check: Pressing Enter or clicking Add creates a card immediately
 
 **Dependencies:** Task 4, Task 12
 
@@ -380,9 +380,9 @@
 ---
 
 ## Checkpoint: Card Creation & Display
-- [ ] Cards can be added inline to any list and rendered with Atlassian styling
-- [ ] Database updates correctly with typed results
-- [ ] Review with human before proceeding
+- [x] Cards can be added inline to any list and rendered with Atlassian styling
+- [x] Database updates correctly with typed results
+- [x] Review with human before proceeding
 
 ---
 
