@@ -1,0 +1,332 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2100 1350" width="2100" height="1350" style="background-color: #ffffff; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#4B5563" />
+    </marker>
+    <filter id="shadow" x="-5%" y="-5%" width="110%" height="115%" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="1" stdDeviation="1.5" flood-color="#000000" flood-opacity="0.04" />
+    </filter>
+  </defs>
+
+  <!-- Title & Subtitle -->
+  <text x="1050" y="42" text-anchor="middle" font-size="20" font-weight="700" fill="#111827" letter-spacing="-0.3">
+    What happens when you interact with a board in Milo
+  </text>
+  <text x="1050" y="66" text-anchor="middle" font-size="13" font-weight="400" fill="#6B7280">
+    Tactile Kanban lifecycle, optimistic updates, concurrency race conditions &amp; verified fixes
+  </text>
+
+  <!-- Key in top-left -->
+  <g transform="translate(60, 36)">
+    <text x="0" y="22" font-size="13" font-weight="600" fill="#374151">Key</text>
+    
+    <!-- Works -->
+    <rect x="40" y="5" width="80" height="28" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.2" />
+    <text x="80" y="23" text-anchor="middle" font-size="12" font-weight="500" fill="#1F2937">Works</text>
+    
+    <!-- Bug -->
+    <rect x="135" y="5" width="125" height="28" rx="6" fill="#FEF2F2" stroke="#EF4444" stroke-width="1.4" />
+    <text x="197" y="23" text-anchor="middle" font-size="12" font-weight="600" fill="#B91C1C">Bug TLA+ found</text>
+    
+    <!-- Fixed -->
+    <rect x="275" y="5" width="75" height="28" rx="6" fill="#ECFDF5" stroke="#10B981" stroke-width="1.4" />
+    <text x="312" y="23" text-anchor="middle" font-size="12" font-weight="600" fill="#047857">Fixed</text>
+  </g>
+
+  <!-- Start Node (Solid Dot) -->
+  <circle cx="1050" cy="120" r="6" fill="#111827" />
+  <path d="M 1050 120 L 1050 150" fill="none" stroke="#4B5563" stroke-width="1.25" marker-end="url(#arrow)" />
+  <path d="M 1050 200 L 1050 232 L 220 232 L 220 289" fill="none" stroke="#4B5563" stroke-width="1.25" marker-end="url(#arrow)" />
+  <rect x="518.4" y="213" width="123.2" height="15" fill="#ffffff" fill-opacity="0.95" rx="2" />
+  <text x="580" y="224" text-anchor="middle" font-size="11" font-weight="400" fill="#4B5563">a list column drag</text>
+  <path d="M 220 341 L 220 394" fill="none" stroke="#4B5563" stroke-width="1.25" marker-end="url(#arrow)" />
+  <rect x="177.6" y="358" width="84.80000000000001" height="15" fill="#ffffff" fill-opacity="0.95" rx="2" />
+  <text x="220" y="369" text-anchor="middle" font-size="11" font-weight="400" fill="#4B5563">drag release</text>
+  <path d="M 220 446 L 220 475 L 120 475 L 120 518" fill="none" stroke="#4B5563" stroke-width="1.25" marker-end="url(#arrow)" />
+  <rect x="71.19999999999999" y="493" width="97.60000000000001" height="15" fill="#ffffff" fill-opacity="0.95" rx="2" />
+  <text x="120" y="504" text-anchor="middle" font-size="11" font-weight="400" fill="#4B5563">write succeeds</text>
+  <path d="M 220 446 L 220 475 L 310 475 L 310 518" fill="none" stroke="#4B5563" stroke-width="1.25" marker-end="url(#arrow)" />
+  <rect x="270.8" y="493" width="78.4" height="15" fill="#ffffff" fill-opacity="0.95" rx="2" />
+  <text x="310" y="504" text-anchor="middle" font-size="11" font-weight="400" fill="#4B5563">write fails</text>
+  <path d="M 310 582 L 310 648" fill="none" stroke="#4B5563" stroke-width="1.25" marker-end="url(#arrow)" />
+  <rect x="267.6" y="606" width="84.80000000000001" height="15" fill="#ffffff" fill-opacity="0.95" rx="2" />
+  <text x="310" y="617" text-anchor="middle" font-size="11" font-weight="400" fill="#4B5563">with the fix</text>
+  <path d="M 1050 200 L 1050 232 L 950 232 L 950 289" fill="none" stroke="#4B5563" stroke-width="1.25" marker-end="url(#arrow)" />
+  <rect x="888.4" y="213" width="123.2" height="15" fill="#ffffff" fill-opacity="0.95" rx="2" />
+  <text x="950" y="224" text-anchor="middle" font-size="11" font-weight="400" fill="#4B5563">a card drag &amp; drop</text>
+  <path d="M 950 341 L 950 402" fill="none" stroke="#4B5563" stroke-width="1.25" marker-end="url(#arrow)" />
+  <path d="M 950 428 L 950 468 L 520 468 L 520 518" fill="none" stroke="#4B5563" stroke-width="1.25" marker-end="url(#arrow)" />
+  <rect x="452" y="486" width="136" height="15" fill="#ffffff" fill-opacity="0.95" rx="2" />
+  <text x="520" y="497" text-anchor="middle" font-size="11" font-weight="400" fill="#4B5563">outside or same slot</text>
+  <path d="M 950 428 L 950 468 L 890 468 L 890 495" fill="none" stroke="#4B5563" stroke-width="1.25" marker-end="url(#arrow)" />
+  <rect x="722" y="471" width="136" height="15" fill="#ffffff" fill-opacity="0.95" rx="2" />
+  <text x="790" y="482" text-anchor="middle" font-size="11" font-weight="400" fill="#4B5563">within the same list</text>
+  <path d="M 890 545 L 890 575 L 740 575 L 740 628" fill="none" stroke="#4B5563" stroke-width="1.25" marker-end="url(#arrow)" />
+  <rect x="688" y="596" width="104" height="15" fill="#ffffff" fill-opacity="0.95" rx="2" />
+  <text x="740" y="607" text-anchor="middle" font-size="11" font-weight="400" fill="#4B5563">server succeeds</text>
+  <path d="M 890 545 L 890 575 L 910 575 L 910 628" fill="none" stroke="#4B5563" stroke-width="1.25" marker-end="url(#arrow)" />
+  <rect x="867.6" y="596" width="84.80000000000001" height="15" fill="#ffffff" fill-opacity="0.95" rx="2" />
+  <text x="910" y="607" text-anchor="middle" font-size="11" font-weight="400" fill="#4B5563">server error</text>
+  <path d="M 910 692 L 910 753" fill="none" stroke="#4B5563" stroke-width="1.25" marker-end="url(#arrow)" />
+  <rect x="867.6" y="713" width="84.80000000000001" height="15" fill="#ffffff" fill-opacity="0.95" rx="2" />
+  <text x="910" y="724" text-anchor="middle" font-size="11" font-weight="400" fill="#4B5563">with the fix</text>
+  <path d="M 890 545 L 890 575 L 1085 575 L 1085 628" fill="none" stroke="#4B5563" stroke-width="1.25" marker-end="url(#arrow)" />
+  <rect x="1010.6" y="596" width="148.8" height="15" fill="#ffffff" fill-opacity="0.95" rx="2" />
+  <text x="1085" y="607" text-anchor="middle" font-size="11" font-weight="400" fill="#4B5563">rapid successive drags</text>
+  <path d="M 1085 692 L 1085 753" fill="none" stroke="#4B5563" stroke-width="1.25" marker-end="url(#arrow)" />
+  <rect x="1042.6" y="713" width="84.80000000000001" height="15" fill="#ffffff" fill-opacity="0.95" rx="2" />
+  <text x="1085" y="724" text-anchor="middle" font-size="11" font-weight="400" fill="#4B5563">with the fix</text>
+  <path d="M 950 428 L 950 468 L 1320 468 L 1320 495" fill="none" stroke="#4B5563" stroke-width="1.25" marker-end="url(#arrow)" />
+  <rect x="1119.2" y="471" width="161.60000000000002" height="15" fill="#ffffff" fill-opacity="0.95" rx="2" />
+  <text x="1200" y="482" text-anchor="middle" font-size="11" font-weight="400" fill="#4B5563">across into another list</text>
+  <path d="M 1320 545 L 1320 575 L 1265 575 L 1265 628" fill="none" stroke="#4B5563" stroke-width="1.25" marker-end="url(#arrow)" />
+  <rect x="1209.8" y="596" width="110.4" height="15" fill="#ffffff" fill-opacity="0.95" rx="2" />
+  <text x="1265" y="607" text-anchor="middle" font-size="11" font-weight="400" fill="#4B5563">dest list exists</text>
+  <path d="M 1320 545 L 1320 575 L 1435 575 L 1435 628" fill="none" stroke="#4B5563" stroke-width="1.25" marker-end="url(#arrow)" />
+  <rect x="1376.6" y="596" width="116.80000000000001" height="15" fill="#ffffff" fill-opacity="0.95" rx="2" />
+  <text x="1435" y="607" text-anchor="middle" font-size="11" font-weight="400" fill="#4B5563">dest list deleted</text>
+  <path d="M 1435 692 L 1435 753" fill="none" stroke="#4B5563" stroke-width="1.25" marker-end="url(#arrow)" />
+  <rect x="1392.6" y="713" width="84.80000000000001" height="15" fill="#ffffff" fill-opacity="0.95" rx="2" />
+  <text x="1435" y="724" text-anchor="middle" font-size="11" font-weight="400" fill="#4B5563">with the fix</text>
+  <path d="M 1050 200 L 1050 232 L 1790 232 L 1790 289" fill="none" stroke="#4B5563" stroke-width="1.25" marker-end="url(#arrow)" />
+  <rect x="1442" y="213" width="136" height="15" fill="#ffffff" fill-opacity="0.95" rx="2" />
+  <text x="1510" y="224" text-anchor="middle" font-size="11" font-weight="400" fill="#4B5563">click on a card tile</text>
+  <path d="M 1790 341 L 1790 402" fill="none" stroke="#4B5563" stroke-width="1.25" marker-end="url(#arrow)" />
+  <path d="M 1790 428 L 1790 468 L 1660 468 L 1660 495" fill="none" stroke="#4B5563" stroke-width="1.25" marker-end="url(#arrow)" />
+  <rect x="1592" y="476" width="136" height="15" fill="#ffffff" fill-opacity="0.95" rx="2" />
+  <text x="1660" y="487" text-anchor="middle" font-size="11" font-weight="400" fill="#4B5563">title or description</text>
+  <path d="M 1660 545 L 1660 575 L 1600 575 L 1600 628" fill="none" stroke="#4B5563" stroke-width="1.25" marker-end="url(#arrow)" />
+  <rect x="1564" y="596" width="72" height="15" fill="#ffffff" fill-opacity="0.95" rx="2" />
+  <text x="1600" y="607" text-anchor="middle" font-size="11" font-weight="400" fill="#4B5563">valid text</text>
+  <path d="M 1660 545 L 1660 575 L 1740 575 L 1740 628" fill="none" stroke="#4B5563" stroke-width="1.25" marker-end="url(#arrow)" />
+  <rect x="1704" y="596" width="72" height="15" fill="#ffffff" fill-opacity="0.95" rx="2" />
+  <text x="1740" y="607" text-anchor="middle" font-size="11" font-weight="400" fill="#4B5563">empty text</text>
+  <path d="M 1790 428 L 1790 468 L 1930 468 L 1930 495" fill="none" stroke="#4B5563" stroke-width="1.25" marker-end="url(#arrow)" />
+  <rect x="1854.8" y="476" width="110.4" height="15" fill="#ffffff" fill-opacity="0.95" rx="2" />
+  <text x="1910" y="487" text-anchor="middle" font-size="11" font-weight="400" fill="#4B5563">checklist toggle</text>
+  <path d="M 1930 545 L 1930 575 L 1870 575 L 1870 628" fill="none" stroke="#4B5563" stroke-width="1.25" marker-end="url(#arrow)" />
+  <rect x="1827.6" y="596" width="84.80000000000001" height="15" fill="#ffffff" fill-opacity="0.95" rx="2" />
+  <text x="1870" y="607" text-anchor="middle" font-size="11" font-weight="400" fill="#4B5563">single click</text>
+  <path d="M 1930 545 L 1930 575 L 2010 575 L 2010 628" fill="none" stroke="#4B5563" stroke-width="1.25" marker-end="url(#arrow)" />
+  <rect x="1967.6" y="596" width="84.80000000000001" height="15" fill="#ffffff" fill-opacity="0.95" rx="2" />
+  <text x="2010" y="607" text-anchor="middle" font-size="11" font-weight="400" fill="#4B5563">rapid clicks</text>
+  <path d="M 2010 692 L 2010 753" fill="none" stroke="#4B5563" stroke-width="1.25" marker-end="url(#arrow)" />
+  <rect x="1967.6" y="713" width="84.80000000000001" height="15" fill="#ffffff" fill-opacity="0.95" rx="2" />
+  <text x="2010" y="724" text-anchor="middle" font-size="11" font-weight="400" fill="#4B5563">with the fix</text>
+  <path d="M 1740 692 L 1740 835 L 1790 835 L 1790 864" fill="none" stroke="#4B5563" stroke-width="1.25" marker-end="url(#arrow)" />
+  <rect x="1712.4" y="816" width="155.20000000000002" height="15" fill="#ffffff" fill-opacity="0.95" rx="2" />
+  <text x="1790" y="827" text-anchor="middle" font-size="11" font-weight="400" fill="#4B5563">set due date / complete</text>
+  <path d="M 1790 916 L 1790 945 L 1690 945 L 1690 993" fill="none" stroke="#4B5563" stroke-width="1.25" marker-end="url(#arrow)" />
+  <rect x="1628.4" y="966" width="123.2" height="15" fill="#ffffff" fill-opacity="0.95" rx="2" />
+  <text x="1690" y="977" text-anchor="middle" font-size="11" font-weight="400" fill="#4B5563">normal date checks</text>
+  <path d="M 1790 916 L 1790 945 L 1890 945 L 1890 993" fill="none" stroke="#4B5563" stroke-width="1.25" marker-end="url(#arrow)" />
+  <rect x="1809.2" y="966" width="161.60000000000002" height="15" fill="#ffffff" fill-opacity="0.95" rx="2" />
+  <text x="1890" y="977" text-anchor="middle" font-size="11" font-weight="400" fill="#4B5563">past date while complete</text>
+  <path d="M 1890 1057 L 1890 1117" fill="none" stroke="#4B5563" stroke-width="1.25" marker-end="url(#arrow)" />
+  <rect x="1847.6" y="1076" width="84.80000000000001" height="15" fill="#ffffff" fill-opacity="0.95" rx="2" />
+  <text x="1890" y="1087" text-anchor="middle" font-size="11" font-weight="400" fill="#4B5563">with the fix</text>
+  <polygon points="950,402 963,415 950,428 937,415" fill="#ffffff" stroke="#4B5563" stroke-width="1.4" filter="url(#shadow)" />
+  <text x="950" y="441" text-anchor="middle" font-size="11" font-style="italic" fill="#4B5563">where is card dropped?</text>
+  <polygon points="1790,402 1803,415 1790,428 1777,415" fill="#ffffff" stroke="#4B5563" stroke-width="1.4" filter="url(#shadow)" />
+  <text x="1790" y="441" text-anchor="middle" font-size="11" font-style="italic" fill="#4B5563">what do you edit?</text>
+  <!-- Node: root -->
+  <g id="root">
+    <rect x="930" y="150" width="240" height="50" rx="6" fill="#ffffff" stroke="#D1D5DB" stroke-width="1.25" filter="url(#shadow)" />
+    <text x="1050" y="172" text-anchor="middle" font-size="11" font-weight="500" fill="#1F2937">User performs an</text>
+    <text x="1050" y="186" text-anchor="middle" font-size="11" font-weight="500" fill="#1F2937">action on the board</text>
+  </g>
+  <!-- Node: list_col -->
+  <g id="list_col">
+    <rect x="110" y="289" width="220" height="52" rx="6" fill="#ffffff" stroke="#D1D5DB" stroke-width="1.25" filter="url(#shadow)" />
+    <text x="220" y="312" text-anchor="middle" font-size="11" font-weight="500" fill="#1F2937">Lists slide into new slot</text>
+    <text x="220" y="326" text-anchor="middle" font-size="11" font-weight="500" fill="#1F2937">instantly on client (optimistic)</text>
+  </g>
+  <!-- Node: list_db -->
+  <g id="list_db">
+    <rect x="110" y="394" width="220" height="52" rx="6" fill="#ffffff" stroke="#D1D5DB" stroke-width="1.25" filter="url(#shadow)" />
+    <text x="220" y="417" text-anchor="middle" font-size="11" font-weight="500" fill="#1F2937">reorderListsAction commits</text>
+    <text x="220" y="431" text-anchor="middle" font-size="11" font-weight="500" fill="#1F2937">new list positions in SQLite</text>
+  </g>
+  <!-- Node: list_works -->
+  <g id="list_works">
+    <rect x="40" y="518" width="160" height="64" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.25" filter="url(#shadow)" />
+    <text x="120" y="540" text-anchor="middle" font-size="11" font-weight="500" fill="#1F2937">Positions sync cleanly;</text>
+    <text x="120" y="554" text-anchor="middle" font-size="11" font-weight="500" fill="#1F2937">board canvas revalidates</text>
+    <text x="120" y="568" text-anchor="middle" font-size="11" font-weight="500" fill="#1F2937">without layout flicker</text>
+  </g>
+  <!-- Node: list_bug -->
+  <g id="list_bug">
+    <rect x="230" y="518" width="160" height="64" rx="6" fill="#FEF2F2" stroke="#EF4444" stroke-width="1.4" filter="url(#shadow)" />
+    <text x="310" y="540" text-anchor="middle" font-size="11" font-weight="600" fill="#991B1B">Network error / DB lock:</text>
+    <text x="310" y="554" text-anchor="middle" font-size="11" font-weight="600" fill="#991B1B">client stays in new order,</text>
+    <text x="310" y="568" text-anchor="middle" font-size="11" font-weight="600" fill="#991B1B">reverts on refresh</text>
+  </g>
+  <!-- Node: list_fix -->
+  <g id="list_fix">
+    <rect x="230" y="648" width="160" height="64" rx="6" fill="#ECFDF5" stroke="#10B981" stroke-width="1.4" filter="url(#shadow)" />
+    <text x="310" y="670" text-anchor="middle" font-size="11" font-weight="600" fill="#065F46">Rollback lists to snapshot</text>
+    <text x="310" y="684" text-anchor="middle" font-size="11" font-weight="600" fill="#065F46">and surface toast error:</text>
+    <text x="310" y="698" text-anchor="middle" font-size="11" font-weight="600" fill="#065F46">&quot;Failed to reorder lists&quot;</text>
+  </g>
+  <!-- Node: card_lift -->
+  <g id="card_lift">
+    <rect x="830" y="289" width="240" height="52" rx="6" fill="#ffffff" stroke="#D1D5DB" stroke-width="1.25" filter="url(#shadow)" />
+    <text x="950" y="312" text-anchor="middle" font-size="11" font-weight="500" fill="#1F2937">Card lifts and follows pointer</text>
+    <text x="950" y="326" text-anchor="middle" font-size="11" font-weight="500" fill="#1F2937">via @hello-pangea/dnd</text>
+  </g>
+  <!-- Node: card_cancel -->
+  <g id="card_cancel">
+    <rect x="435" y="518" width="170" height="64" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.25" filter="url(#shadow)" />
+    <text x="520" y="540" text-anchor="middle" font-size="11" font-weight="500" fill="#1F2937">Card snaps back smoothly</text>
+    <text x="520" y="554" text-anchor="middle" font-size="11" font-weight="500" fill="#1F2937">to origin; zero server</text>
+    <text x="520" y="568" text-anchor="middle" font-size="11" font-weight="500" fill="#1F2937">requests dispatched</text>
+  </g>
+  <!-- Node: card_same -->
+  <g id="card_same">
+    <rect x="775" y="495" width="230" height="50" rx="6" fill="#ffffff" stroke="#D1D5DB" stroke-width="1.25" filter="url(#shadow)" />
+    <text x="890" y="517" text-anchor="middle" font-size="11" font-weight="500" fill="#1F2937">calculateReorderedPosition</text>
+    <text x="890" y="531" text-anchor="middle" font-size="11" font-weight="500" fill="#1F2937">updates client state instantly</text>
+  </g>
+  <!-- Node: card_same_works -->
+  <g id="card_same_works">
+    <rect x="663" y="628" width="155" height="64" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.25" filter="url(#shadow)" />
+    <text x="740" y="650" text-anchor="middle" font-size="11" font-weight="500" fill="#1F2937">moveCardAction persists;</text>
+    <text x="740" y="664" text-anchor="middle" font-size="11" font-weight="500" fill="#1F2937">SQLite updates position;</text>
+    <text x="740" y="678" text-anchor="middle" font-size="11" font-weight="500" fill="#1F2937">CardActivity logged</text>
+  </g>
+  <!-- Node: card_same_bug1 -->
+  <g id="card_same_bug1">
+    <rect x="833" y="628" width="155" height="64" rx="6" fill="#FEF2F2" stroke="#EF4444" stroke-width="1.4" filter="url(#shadow)" />
+    <text x="910" y="650" text-anchor="middle" font-size="11" font-weight="600" fill="#991B1B">Server error / 401 auth:</text>
+    <text x="910" y="664" text-anchor="middle" font-size="11" font-weight="600" fill="#991B1B">card stays in moved slot;</text>
+    <text x="910" y="678" text-anchor="middle" font-size="11" font-weight="600" fill="#991B1B">desynced until refresh</text>
+  </g>
+  <!-- Node: card_same_fix1 -->
+  <g id="card_same_fix1">
+    <rect x="833" y="753" width="155" height="64" rx="6" fill="#ECFDF5" stroke="#10B981" stroke-width="1.4" filter="url(#shadow)" />
+    <text x="910" y="775" text-anchor="middle" font-size="11" font-weight="600" fill="#065F46">Optimistic rollback reverts</text>
+    <text x="910" y="789" text-anchor="middle" font-size="11" font-weight="600" fill="#065F46">cards to pre-drag snapshot</text>
+    <text x="910" y="803" text-anchor="middle" font-size="11" font-weight="600" fill="#065F46">with warning toast</text>
+  </g>
+  <!-- Node: card_same_bug2 -->
+  <g id="card_same_bug2">
+    <rect x="1003" y="628" width="165" height="64" rx="6" fill="#FEF2F2" stroke="#EF4444" stroke-width="1.4" filter="url(#shadow)" />
+    <text x="1085" y="650" text-anchor="middle" font-size="11" font-weight="600" fill="#991B1B">Rapid multi-card drags:</text>
+    <text x="1085" y="664" text-anchor="middle" font-size="11" font-weight="600" fill="#991B1B">revalidation from drag 1</text>
+    <text x="1085" y="678" text-anchor="middle" font-size="11" font-weight="600" fill="#991B1B">wipes out drag 2 position</text>
+  </g>
+  <!-- Node: card_same_fix2 -->
+  <g id="card_same_fix2">
+    <rect x="1003" y="753" width="165" height="64" rx="6" fill="#ECFDF5" stroke="#10B981" stroke-width="1.4" filter="url(#shadow)" />
+    <text x="1085" y="775" text-anchor="middle" font-size="11" font-weight="600" fill="#065F46">Monotonic request ID drops</text>
+    <text x="1085" y="789" text-anchor="middle" font-size="11" font-weight="600" fill="#065F46">stale revalidations until</text>
+    <text x="1085" y="803" text-anchor="middle" font-size="11" font-weight="600" fill="#065F46">all mutations settle</text>
+  </g>
+  <!-- Node: card_cross -->
+  <g id="card_cross">
+    <rect x="1210" y="495" width="220" height="50" rx="6" fill="#ffffff" stroke="#D1D5DB" stroke-width="1.25" filter="url(#shadow)" />
+    <text x="1320" y="517" text-anchor="middle" font-size="11" font-weight="500" fill="#1F2937">Card spliced to dest list;</text>
+    <text x="1320" y="531" text-anchor="middle" font-size="11" font-weight="500" fill="#1F2937">recalculated sparse positions</text>
+  </g>
+  <!-- Node: card_cross_works -->
+  <g id="card_cross_works">
+    <rect x="1188" y="628" width="155" height="64" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.25" filter="url(#shadow)" />
+    <text x="1265" y="650" text-anchor="middle" font-size="11" font-weight="500" fill="#1F2937">moveCardAction commits;</text>
+    <text x="1265" y="664" text-anchor="middle" font-size="11" font-weight="500" fill="#1F2937">targetListId &amp; pos update;</text>
+    <text x="1265" y="678" text-anchor="middle" font-size="11" font-weight="500" fill="#1F2937">&quot;moved card&quot; logged in feed</text>
+  </g>
+  <!-- Node: card_cross_bug -->
+  <g id="card_cross_bug">
+    <rect x="1358" y="628" width="155" height="64" rx="6" fill="#FEF2F2" stroke="#EF4444" stroke-width="1.4" filter="url(#shadow)" />
+    <text x="1435" y="650" text-anchor="middle" font-size="11" font-weight="600" fill="#991B1B">Dest list deleted concurrently:</text>
+    <text x="1435" y="664" text-anchor="middle" font-size="11" font-weight="600" fill="#991B1B">card floats in missing list;</text>
+    <text x="1435" y="678" text-anchor="middle" font-size="11" font-weight="600" fill="#991B1B">server rejects ListNotFound</text>
+  </g>
+  <!-- Node: card_cross_fix -->
+  <g id="card_cross_fix">
+    <rect x="1358" y="753" width="155" height="64" rx="6" fill="#ECFDF5" stroke="#10B981" stroke-width="1.4" filter="url(#shadow)" />
+    <text x="1435" y="775" text-anchor="middle" font-size="11" font-weight="600" fill="#065F46">Reconcile state with server;</text>
+    <text x="1435" y="789" text-anchor="middle" font-size="11" font-weight="600" fill="#065F46">card returns to source list</text>
+    <text x="1435" y="803" text-anchor="middle" font-size="11" font-weight="600" fill="#065F46">with clarifying alert</text>
+  </g>
+  <!-- Node: modal_open -->
+  <g id="modal_open">
+    <rect x="1675" y="289" width="230" height="52" rx="6" fill="#ffffff" stroke="#D1D5DB" stroke-width="1.25" filter="url(#shadow)" />
+    <text x="1790" y="312" text-anchor="middle" font-size="11" font-weight="500" fill="#1F2937">CardModal opens with title,</text>
+    <text x="1790" y="326" text-anchor="middle" font-size="11" font-weight="500" fill="#1F2937">checklists, labels &amp; due date</text>
+  </g>
+  <!-- Node: edit_title -->
+  <g id="edit_title">
+    <rect x="1580" y="495" width="160" height="50" rx="6" fill="#ffffff" stroke="#D1D5DB" stroke-width="1.25" filter="url(#shadow)" />
+    <text x="1660" y="517" text-anchor="middle" font-size="11" font-weight="500" fill="#1F2937">Input blur triggers</text>
+    <text x="1660" y="531" text-anchor="middle" font-size="11" font-weight="500" fill="#1F2937">updateCardAction</text>
+  </g>
+  <!-- Node: title_w1 -->
+  <g id="title_w1">
+    <rect x="1535" y="628" width="130" height="64" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.25" filter="url(#shadow)" />
+    <text x="1600" y="650" text-anchor="middle" font-size="11" font-weight="500" fill="#1F2937">Non-empty text:</text>
+    <text x="1600" y="664" text-anchor="middle" font-size="11" font-weight="500" fill="#1F2937">updates SQLite &amp; logs</text>
+    <text x="1600" y="678" text-anchor="middle" font-size="11" font-weight="500" fill="#1F2937">activity in feed</text>
+  </g>
+  <!-- Node: title_w2 -->
+  <g id="title_w2">
+    <rect x="1675" y="628" width="130" height="64" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.25" filter="url(#shadow)" />
+    <text x="1740" y="650" text-anchor="middle" font-size="11" font-weight="500" fill="#1F2937">Empty title:</text>
+    <text x="1740" y="664" text-anchor="middle" font-size="11" font-weight="500" fill="#1F2937">reverts to original;</text>
+    <text x="1740" y="678" text-anchor="middle" font-size="11" font-weight="500" fill="#1F2937">no mutation sent</text>
+  </g>
+  <!-- Node: checklist_node -->
+  <g id="checklist_node">
+    <rect x="1850" y="495" width="160" height="50" rx="6" fill="#ffffff" stroke="#D1D5DB" stroke-width="1.25" filter="url(#shadow)" />
+    <text x="1930" y="517" text-anchor="middle" font-size="11" font-weight="500" fill="#1F2937">calculateChecklistProgress</text>
+    <text x="1930" y="531" text-anchor="middle" font-size="11" font-weight="500" fill="#1F2937">updates % immediately</text>
+  </g>
+  <!-- Node: chk_works -->
+  <g id="chk_works">
+    <rect x="1805" y="628" width="130" height="64" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.25" filter="url(#shadow)" />
+    <text x="1870" y="650" text-anchor="middle" font-size="11" font-weight="500" fill="#1F2937">All checked:</text>
+    <text x="1870" y="664" text-anchor="middle" font-size="11" font-weight="500" fill="#1F2937">progress hits 100%,</text>
+    <text x="1870" y="678" text-anchor="middle" font-size="11" font-weight="500" fill="#1F2937">bar turns green</text>
+  </g>
+  <!-- Node: chk_bug -->
+  <g id="chk_bug">
+    <rect x="1940" y="628" width="140" height="64" rx="6" fill="#FEF2F2" stroke="#EF4444" stroke-width="1.4" filter="url(#shadow)" />
+    <text x="2010" y="650" text-anchor="middle" font-size="11" font-weight="600" fill="#991B1B">Rapid multi-clicks:</text>
+    <text x="2010" y="664" text-anchor="middle" font-size="11" font-weight="600" fill="#991B1B">concurrent writes lock DB;</text>
+    <text x="2010" y="678" text-anchor="middle" font-size="11" font-weight="600" fill="#991B1B">checkboxes desync</text>
+  </g>
+  <!-- Node: chk_fix -->
+  <g id="chk_fix">
+    <rect x="1940" y="753" width="140" height="64" rx="6" fill="#ECFDF5" stroke="#10B981" stroke-width="1.4" filter="url(#shadow)" />
+    <text x="2010" y="775" text-anchor="middle" font-size="11" font-weight="600" fill="#065F46">Item-level lock</text>
+    <text x="2010" y="789" text-anchor="middle" font-size="11" font-weight="600" fill="#065F46">serializes checklist</text>
+    <text x="2010" y="803" text-anchor="middle" font-size="11" font-weight="600" fill="#065F46">mutations safely in order</text>
+  </g>
+  <!-- Node: due_card_node -->
+  <g id="due_card_node">
+    <rect x="1670" y="864" width="240" height="52" rx="6" fill="#ffffff" stroke="#D1D5DB" stroke-width="1.25" filter="url(#shadow)" />
+    <text x="1790" y="887" text-anchor="middle" font-size="11" font-weight="500" fill="#1F2937">getDueDateStatus computes status:</text>
+    <text x="1790" y="901" text-anchor="middle" font-size="11" font-weight="500" fill="#1F2937">OVERDUE, DUE_SOON, COMPLETE</text>
+  </g>
+  <!-- Node: due_works -->
+  <g id="due_works">
+    <rect x="1610" y="993" width="160" height="64" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.25" filter="url(#shadow)" />
+    <text x="1690" y="1015" text-anchor="middle" font-size="11" font-weight="500" fill="#1F2937">Due &lt; 24h: yellow &quot;Due soon&quot;</text>
+    <text x="1690" y="1029" text-anchor="middle" font-size="11" font-weight="500" fill="#1F2937">isCompleted: green &quot;Complete&quot;</text>
+    <text x="1690" y="1043" text-anchor="middle" font-size="11" font-weight="500" fill="#1F2937">Past &amp; incomplete: &quot;Overdue&quot;</text>
+  </g>
+  <!-- Node: due_bug -->
+  <g id="due_bug">
+    <rect x="1803" y="993" width="175" height="64" rx="6" fill="#FEF2F2" stroke="#EF4444" stroke-width="1.4" filter="url(#shadow)" />
+    <text x="1890" y="1015" text-anchor="middle" font-size="11" font-weight="600" fill="#991B1B">Past date set on complete card:</text>
+    <text x="1890" y="1029" text-anchor="middle" font-size="11" font-weight="600" fill="#991B1B">date math overrides flag,</text>
+    <text x="1890" y="1043" text-anchor="middle" font-size="11" font-weight="600" fill="#991B1B">badge falsely shows &quot;Overdue&quot;</text>
+  </g>
+  <!-- Node: due_fix -->
+  <g id="due_fix">
+    <rect x="1803" y="1117" width="175" height="56" rx="6" fill="#ECFDF5" stroke="#10B981" stroke-width="1.4" filter="url(#shadow)" />
+    <text x="1890" y="1142" text-anchor="middle" font-size="11" font-weight="600" fill="#065F46">isCompleted guard takes priority;</text>
+    <text x="1890" y="1156" text-anchor="middle" font-size="11" font-weight="600" fill="#065F46">badge remains &quot;Complete&quot;</text>
+  </g>
+</svg>

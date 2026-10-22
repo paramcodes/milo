@@ -7,7 +7,7 @@
   },
   "files": {
     "ignoreUnknown": true,
-    "ignore": ["node_modules", ".next", "dist", "*.db", "*.db-journal", "test.db"]
+    "ignore": ["node_modules", ".next", "dist", "*.db", "*.db-journal", "test.db", "videos"]
   },
   "formatter": {
     "enabled": true,

@@ -1,0 +1,400 @@
+<template>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    #root {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: #071329;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: #ffffff;
+      padding: 60px 80px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .grid-lines {
+      position: absolute;
+      inset: 0;
+      background-image: 
+        linear-gradient(to right, rgba(0, 184, 217, 0.05) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(0, 184, 217, 0.05) 1px, transparent 1px);
+      background-size: 50px 50px;
+    }
+    .glow-spot {
+      position: absolute;
+      width: 800px;
+      height: 800px;
+      right: -100px;
+      bottom: -200px;
+      background: radial-gradient(circle, rgba(0, 82, 204, 0.25) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .scene-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      position: relative;
+      z-index: 10;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+      padding-bottom: 24px;
+    }
+    .kicker {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 14px;
+      color: #00B8D9;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .title {
+      font-size: 44px;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+    }
+    .title-accent {
+      color: #388BFF;
+    }
+    .header-chips {
+      display: flex;
+      gap: 12px;
+    }
+    .chip {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      padding: 6px 14px;
+      border-radius: 9999px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #E3FCEF;
+    }
+
+    .split-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 50px;
+      align-items: center;
+      flex: 1;
+      padding: 30px 0;
+      position: relative;
+      z-index: 10;
+    }
+
+    /* Left: Architecture Slices */
+    .arch-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .arch-box {
+      background: rgba(9, 30, 66, 0.7);
+      border: 1px solid rgba(0, 82, 204, 0.4);
+      border-radius: 10px;
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    }
+    .arch-box-left {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .arch-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      background: rgba(0, 82, 204, 0.25);
+      border: 1px solid #0052CC;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+    }
+    .arch-name {
+      font-size: 17px;
+      font-weight: 700;
+      color: #ffffff;
+    }
+    .arch-desc {
+      font-size: 13px;
+      color: #8993A4;
+      font-family: 'JetBrains Mono', monospace;
+      margin-top: 2px;
+    }
+    .arch-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      padding: 4px 10px;
+      border-radius: 6px;
+      background: #00875A;
+      color: #ffffff;
+      font-weight: 700;
+    }
+
+    /* Right: Terminal Command Window */
+    .terminal-window {
+      background: #050C1A;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6), 0 0 40px rgba(0, 184, 217, 0.15);
+    }
+    .terminal-bar {
+      background: #0B1933;
+      padding: 12px 18px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .win-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+    }
+    .win-title {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: #8993A4;
+      margin-left: 10px;
+    }
+    .terminal-body {
+      padding: 24px 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+    .term-line {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .cmd-text {
+      color: #00B8D9;
+      font-weight: 600;
+    }
+    .cmd-res {
+      color: #57D9A3;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+    }
+    .cmd-res-meta {
+      color: #8993A4;
+      font-size: 12px;
+    }
+
+    /* Floating callout */
+    .bottom-callout {
+      position: relative;
+      z-index: 10;
+      background: rgba(0, 82, 204, 0.2);
+      border: 1px solid rgba(56, 139, 255, 0.3);
+      border-radius: 8px;
+      padding: 12px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      color: #B3BAC5;
+    }
+  </style>
+
+  <div id="root" data-composition-id="scene4" data-start="0" data-duration="6.5" data-width="1920" data-height="1080">
+    <div id="s4-grid" class="grid-lines clip" data-start="0" data-duration="6.5"></div>
+    <div id="s4-glow" class="glow-spot clip" data-layout-allow-overflow data-start="0" data-duration="6.5"></div>
+
+    <!-- Header -->
+    <div id="s4-header" class="scene-header clip" data-start="0" data-duration="6.5">
+      <div>
+        <div class="kicker" data-layout-ignore>MECHANICAL BOUNDARY ENFORCEMENT</div>
+        <h2 class="title">Agent-Verifiable <span class="title-accent">Architecture</span></h2>
+      </div>
+      <div class="header-chips" data-layout-ignore>
+        <span class="chip">Zero Mocks</span>
+        <span class="chip">Zero Barrel Files</span>
+        <span class="chip">Strict TypeScript</span>
+      </div>
+    </div>
+
+    <!-- Split Grid: Architecture on Left, Terminal on Right -->
+    <div id="s4-split" class="split-grid clip" data-layout-ignore data-start="0" data-duration="6.5">
+      <!-- Left: Architecture Stack -->
+      <div id="s4-arch-list" class="arch-stack">
+        <div class="arch-box">
+          <div class="arch-box-left">
+            <div class="arch-icon">⚡</div>
+            <div>
+              <div class="arch-name">Vertical Feature Slices</div>
+              <div class="arch-desc">src/features/&lt;domain&gt; (schema, repo, service, api)</div>
+            </div>
+          </div>
+          <span class="arch-tag">ISOLATED</span>
+        </div>
+
+        <div class="arch-box">
+          <div class="arch-box-left">
+            <div class="arch-icon">🛡</div>
+            <div>
+              <div class="arch-name">Strict Result&lt;T, E&gt; Discipline</div>
+              <div class="arch-desc">Typed success/failure instead of runtime exceptions</div>
+            </div>
+          </div>
+          <span class="arch-tag">TYPED</span>
+        </div>
+
+        <div class="arch-box">
+          <div class="arch-box-left">
+            <div class="arch-icon">📦</div>
+            <div>
+              <div class="arch-name">Banned Barrels &amp; utils.ts</div>
+              <div class="arch-desc">Layered into shared/kernel, shared/calc, shared/ui</div>
+            </div>
+          </div>
+          <span class="arch-tag">ENFORCED</span>
+        </div>
+
+        <div class="arch-box">
+          <div class="arch-box-left">
+            <div class="arch-icon">🗄</div>
+            <div>
+              <div class="arch-name">Zero-Mock SQLite Database</div>
+              <div class="arch-desc">Ephemeral file:test.db for 100% genuine verification</div>
+            </div>
+          </div>
+          <span class="arch-tag">GENUINE</span>
+        </div>
+      </div>
+
+      <!-- Right: Real Terminal Output -->
+      <div id="s4-term" class="terminal-window" data-hold>
+        <div class="terminal-bar">
+          <span class="win-dot" style="background: #FF5630;"></span>
+          <span class="win-dot" style="background: #FFAB00;"></span>
+          <span class="win-dot" style="background: #36B37E;"></span>
+          <span class="win-title">bash — verification-pipeline</span>
+        </div>
+
+        <div class="terminal-body">
+          <div id="s4-cmd1" class="term-line">
+            <span class="cmd-text">$ bun run check:arch</span>
+            <span class="cmd-res">✓ AST Architecture Boundary Linter passed (0 violations)</span>
+            <span class="cmd-res-meta">Enforced: no UI in server/db, direct subpaths only</span>
+          </div>
+
+          <div id="s4-cmd2" class="term-line">
+            <span class="cmd-text">$ bun run check:size</span>
+            <span class="cmd-res">✓ LOC Guardrail passed (0 files exceeding 400 lines)</span>
+            <span class="cmd-res-meta">Enforced: modular vertical slices prevent god-files</span>
+          </div>
+
+          <div id="s4-cmd3" class="term-line">
+            <span class="cmd-text">$ bun run test</span>
+            <span class="cmd-res">✓ 42 / 42 tests passed in 184ms (Zero Mocks SQLite)</span>
+            <span class="cmd-res-meta">Colocated unit + ephemeral integration tests</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom Callout -->
+    <div id="s4-callout" class="bottom-callout clip" data-layout-ignore data-start="0" data-duration="6.5">
+      <span>AI AGENT NAVIGATION: Single root AGENTS.md router &lt; 80 lines with scoped domain micro-rules</span>
+      <span style="color:#388BFF">PASS @ ALL GATES</span>
+    </div>
+  </div>
+
+  <script>
+    const tl = gsap.timeline({ paused: true });
+
+    // Initial state
+    gsap.set("#s4-header", { opacity: 0, y: -20 });
+    gsap.set(".arch-box", { opacity: 0, x: -30 });
+    gsap.set("#s4-term", { opacity: 0, scale: 0.95, y: 20 });
+    gsap.set("#s4-cmd1", { opacity: 0 });
+    gsap.set("#s4-cmd2", { opacity: 0 });
+    gsap.set("#s4-cmd3", { opacity: 0 });
+    gsap.set("#s4-callout", { opacity: 0, y: 20 });
+
+    // Header Entrance
+    tl.fromTo(
+      "#s4-header",
+      { opacity: 0, y: -20 },
+      { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" },
+      0.1
+    );
+
+    // Arch Boxes Stagger In
+    tl.to(
+      ".arch-box",
+      { opacity: 1, x: 0, stagger: 0.12, duration: 0.6, ease: "power3.out" },
+      0.3
+    );
+
+    // Terminal Window Appears
+    tl.to(
+      "#s4-term",
+      { opacity: 1, scale: 1, y: 0, duration: 0.7, ease: "back.out(1.1)" },
+      0.5
+    );
+
+    // Terminal commands stream in sequence
+    tl.fromTo(
+      "#s4-cmd1",
+      { opacity: 0, x: 10 },
+      { opacity: 1, x: 0, duration: 0.35 },
+      1.1
+    );
+
+    tl.fromTo(
+      "#s4-cmd2",
+      { opacity: 0, x: 10 },
+      { opacity: 1, x: 0, duration: 0.35 },
+      1.9
+    );
+
+    tl.fromTo(
+      "#s4-cmd3",
+      { opacity: 0, x: 10 },
+      { opacity: 1, x: 0, duration: 0.35 },
+      2.7
+    );
+
+    // Bottom Callout
+    tl.to(
+      "#s4-callout",
+      { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" },
+      3.2
+    );
+
+    // Gentle camera breathe
+    tl.to(
+      "#s4-split",
+      { scale: 1.02, duration: 2.8, ease: "sine.inOut" },
+      3.5
+    );
+
+    // Exit transition
+    tl.to(
+      "#root",
+      { opacity: 0, scale: 1.04, duration: 0.45, ease: "power2.in" },
+      6.05
+    );
+
+    window.__timelines["scene4"] = tl;
+  </script>
+</template>

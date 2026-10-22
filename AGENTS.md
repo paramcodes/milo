@@ -23,6 +23,8 @@ Do not grep the whole repository. Navigate directly using this routing table:
 |---|---|
 | Understand system topology, error codes, and layer rules | `docs/ARCHITECTURE.md` |
 | Inspect database entities, relations, and table invariants | `docs/DB_SCHEMA.md` |
+| Inspect interactive state transitions, concurrency bugs & fixes | `docs/STATE_CHART.md` |
+| Inspect formal verification models & TLA+ specifications | `docs/tlaplus/` |
 | Understand past technical decisions & architectural trade-offs | `docs/ADR/` |
 | Work on Shared Kernel, Math, UI, or Telemetry | `src/shared/AGENTS.md` |
 | Work on Auth, Sessions, or Password Hashing | `src/features/auth/AGENTS.md` |

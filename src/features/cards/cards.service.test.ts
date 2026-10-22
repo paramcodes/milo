@@ -96,6 +96,86 @@ describe('cards.service integration (zero-mock SQLite)', () => {
     expect(cardInDb?.position).toBe(1500);
   });
 
+  it('eliminates position collisions when reordering cards in the same list', async () => {
+    const c1 = await createCardCommand({ listId: listId1, title: 'Card 1' }, userId);
+    const c2 = await createCardCommand({ listId: listId1, title: 'Card 2' }, userId);
+    const c3 = await createCardCommand({ listId: listId1, title: 'Card 3' }, userId);
+    if (!c1.success || !c2.success || !c3.success) return;
+
+    // Move Card 1 from index 0 to index 1 (between Card 2 and Card 3)
+    const moveResult = await moveCardCommand(
+      {
+        cardId: c1.data.id,
+        targetListId: listId1,
+        newPosition: 2000,
+        cardIds: [c2.data.id, c1.data.id, c3.data.id],
+      },
+      userId,
+    );
+
+    expect(moveResult.success).toBe(true);
+
+    const cardsInDb = await db.card.findMany({
+      where: { listId: listId1 },
+      orderBy: { position: 'asc' },
+    });
+
+    expect(cardsInDb.map((c) => c.id)).toEqual([c2.data.id, c1.data.id, c3.data.id]);
+    expect(cardsInDb.map((c) => c.position)).toEqual([1000, 2000, 3000]);
+
+    // Invariant: no duplicate positions
+    const positions = cardsInDb.map((c) => c.position);
+    const uniquePositions = new Set(positions);
+    expect(uniquePositions.size).toBe(positions.length);
+  });
+
+  it('automatically resolves position collision when cardIds is omitted', async () => {
+    const c1 = await createCardCommand({ listId: listId1, title: 'Card A' }, userId);
+    const c2 = await createCardCommand({ listId: listId1, title: 'Card B' }, userId);
+    if (!c1.success || !c2.success) return;
+
+    // c1 is at 1000, c2 is at 2000.
+    // Move c1 directly to 2000 without cardIds (colliding with c2)
+    const moveResult = await moveCardCommand(
+      {
+        cardId: c1.data.id,
+        targetListId: listId1,
+        newPosition: 2000,
+      },
+      userId,
+    );
+
+    expect(moveResult.success).toBe(true);
+
+    const cardsInDb = await db.card.findMany({
+      where: { listId: listId1 },
+      orderBy: { position: 'asc' },
+    });
+
+    const positions = cardsInDb.map((c) => c.position);
+    const uniquePositions = new Set(positions);
+    expect(uniquePositions.size).toBe(positions.length);
+  });
+
+  it('returns LIST_NOT_FOUND when moving card to a nonexistent or deleted list', async () => {
+    const c = await createCardCommand({ listId: listId1, title: 'Move Me' }, userId);
+    if (!c.success) return;
+
+    const moveResult = await moveCardCommand(
+      {
+        cardId: c.data.id,
+        targetListId: 'nonexistent-list-id',
+        newPosition: 1000,
+      },
+      userId,
+    );
+
+    expect(moveResult.success).toBe(false);
+    if (!moveResult.success) {
+      expect(moveResult.error.code).toBe('LIST_NOT_FOUND');
+    }
+  });
+
   it('deletes card', async () => {
     const c = await createCardCommand({ listId: listId1, title: 'Delete Me' }, userId);
     if (!c.success) return;
