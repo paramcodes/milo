@@ -155,15 +155,15 @@
 **Description:** Run all canonical verification commands to ensure zero regressions across layer boundaries, file sizes, types, formatting, and unit/integration tests.
 
 **Acceptance criteria:**
-- [ ] `bun run check:arch` passes with zero layer boundary violations.
-- [ ] `bun run check:size` passes with zero files exceeding 400 LOC.
-- [ ] `bun run check` passes with zero Biome format or lint warnings.
-- [ ] `bun x tsc --noEmit` passes with zero TypeScript diagnostics.
-- [ ] `bun run knip` passes with zero orphaned exports or unused dependencies.
-- [ ] `bun run test` passes 100% of unit and integration tests.
+- [x] `bun run check:arch` passes with zero layer boundary violations.
+- [x] `bun run check:size` passes with zero files exceeding 400 LOC.
+- [x] `bun run check` passes with zero Biome format or lint warnings.
+- [x] `bun x tsc --noEmit` passes with zero TypeScript diagnostics.
+- [x] `bun run knip` passes with zero orphaned exports or unused dependencies.
+- [x] `bun run test` passes 100% of unit and integration tests.
 
 **Verification:**
-- [ ] Run canonical verification commands sequentially.
+- [x] Run canonical verification commands sequentially.
 
 **Dependencies:** Task 1 through Task 6
 
