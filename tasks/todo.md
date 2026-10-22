@@ -82,14 +82,14 @@
 **Description:** Implement monotonic transaction sequence tracking in `board-canvas.tsx` for drag-and-drop operations, adhering to the `TransactionSequencing.tla` model. Guard client state against out-of-order server action responses and revalidations during rapid successive card drags.
 
 **Acceptance criteria:**
-- [ ] Maintain monotonic sequence reference (`txSeqRef`) incremented on each user drag gesture.
-- [ ] Track last acknowledged sequence ID (`lastAckSeqRef`).
-- [ ] Discard / ignore stale server action completions where `seqId <= lastAckSeqRef.current`.
-- [ ] Prevent UI flicker and stale position overwrites when rapid drags resolve out of order.
+- [x] Maintain monotonic sequence reference (`txSeqRef`) incremented on each user drag gesture.
+- [x] Track last acknowledged sequence ID (`lastAckSeqRef`).
+- [x] Discard / ignore stale server action completions where `seqId <= lastAckSeqRef.current`.
+- [x] Prevent UI flicker and stale position overwrites when rapid drags resolve out of order.
 
 **Verification:**
-- [ ] Tests pass: `bun test src/features/boards/components/board-canvas.test.tsx`
-- [ ] Type check succeeds: `bun x tsc --noEmit`
+- [x] Tests pass: `bun test src/features/boards/components/board-canvas.test.tsx`
+- [x] Type check succeeds: `bun x tsc --noEmit`
 
 **Dependencies:** Task 3
 
@@ -104,14 +104,14 @@
 **Description:** Implement defensive optimistic rollback in `board-canvas.tsx` adhering to the `OptimisticSyncWithRollback.tla` specification. Capture pre-drag snapshot prior to optimistic state mutation; if `moveCardAction` or `reorderListsAction` returns failure or throws a network error, revert the client state back to the pre-drag snapshot.
 
 **Acceptance criteria:**
-- [ ] Pre-drag list state snapshot is captured immediately before optimistic mutation.
-- [ ] Server Action return value is checked for `!result.success`.
-- [ ] If Server Action fails or throws, client state restores previous lists snapshot.
-- [ ] Toast / user notification warns the user that the move could not be saved.
+- [x] Pre-drag list state snapshot is captured immediately before optimistic mutation.
+- [x] Server Action return value is checked for `!result.success`.
+- [x] If Server Action fails or throws, client state restores previous lists snapshot.
+- [x] Toast / user notification warns the user that the move could not be saved.
 
 **Verification:**
-- [ ] Tests pass: `bun test src/features/boards/components/board-canvas.test.tsx`
-- [ ] Architecture check passes: `bun run check:arch`
+- [x] Tests pass: `bun test src/features/boards/components/board-canvas.test.tsx`
+- [x] Architecture check passes: `bun run check:arch`
 
 **Dependencies:** Task 4
 
@@ -126,12 +126,12 @@
 **Description:** Add automated tests in `board-canvas.test.tsx` simulating server action rejections and rapid out-of-order completions to verify that rollback and monotonic sequence guards behave according to specification.
 
 **Acceptance criteria:**
-- [ ] Test verifies that when `moveCardAction` returns `Result.failure('LIST_NOT_FOUND')`, the dragged card snaps back to its original list and position.
-- [ ] Test verifies that an older server action response resolving after a newer one does not overwrite the latest card position.
+- [x] Test verifies that when `moveCardAction` returns `Result.failure('LIST_NOT_FOUND')`, the dragged card snaps back to its original list and position.
+- [x] Test verifies that an older server action response resolving after a newer one does not overwrite the latest card position.
 
 **Verification:**
-- [ ] Tests pass: `bun test src/features/boards/components/board-canvas.test.tsx`
-- [ ] File size check: `bun run check:size` verifies `board-canvas.tsx` is < 400 LOC.
+- [x] Tests pass: `bun test src/features/boards/components/board-canvas.test.tsx`
+- [x] File size check: `bun run check:size` verifies `board-canvas.tsx` is < 400 LOC.
 
 **Dependencies:** Task 5
 
@@ -143,9 +143,9 @@
 ---
 
 ## Checkpoint: Client Concurrency Verified
-- [ ] `board-canvas.test.tsx` passes cleanly
-- [ ] Rollback and monotonic sequence logic verified
-- [ ] Architecture linter and file size guard pass cleanly
+- [x] `board-canvas.test.tsx` passes cleanly
+- [x] Rollback and monotonic sequence logic verified
+- [x] Architecture linter and file size guard pass cleanly
 
 ---
 

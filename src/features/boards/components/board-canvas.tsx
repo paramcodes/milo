@@ -23,6 +23,8 @@ export function BoardCanvas({ board, onCardClick }: BoardCanvasProps) {
   const [lists, setLists] = useState(board.lists);
   const [selectedCardId, setSelectedCardId] = useState<string | null>(null);
   const [, startTransition] = useTransition();
+  const txSeqRef = React.useRef(0);
+  const lastAckSeqRef = React.useRef(0);
 
   const selectedCard = selectedCardId
     ? (lists.flatMap((l) => l.cards).find((c) => c.id === selectedCardId) ?? null)
@@ -41,16 +43,31 @@ export function BoardCanvas({ board, onCardClick }: BoardCanvasProps) {
       return;
     }
 
+    const currentSeq = ++txSeqRef.current;
+    const previousLists = lists;
+
     // 1. Reordering Lists horizontally
     if (type === 'list') {
       const reordered = calculateReorderedPosition(lists, source.index, destination.index);
       setLists(reordered);
 
       startTransition(async () => {
-        await reorderListsAction({
-          boardId: board.id,
-          listIds: reordered.map((l) => l.id),
-        });
+        try {
+          const res = await reorderListsAction({
+            boardId: board.id,
+            listIds: reordered.map((l) => l.id),
+          });
+          if (currentSeq <= lastAckSeqRef.current) return;
+          lastAckSeqRef.current = currentSeq;
+          if (!res.success) {
+            setLists(previousLists);
+          }
+        } catch {
+          if (currentSeq > lastAckSeqRef.current) {
+            lastAckSeqRef.current = currentSeq;
+            setLists(previousLists);
+          }
+        }
       });
       return;
     }
@@ -76,14 +93,27 @@ export function BoardCanvas({ board, onCardClick }: BoardCanvasProps) {
       const movedCard = reorderedCards[destination.index];
       if (movedCard) {
         startTransition(async () => {
-          await moveCardAction(
-            {
-              cardId: draggableId,
-              targetListId: destination.droppableId,
-              newPosition: movedCard.position,
-            },
-            board.id,
-          );
+          try {
+            const res = await moveCardAction(
+              {
+                cardId: draggableId,
+                targetListId: destination.droppableId,
+                newPosition: movedCard.position,
+                cardIds: reorderedCards.map((c) => c.id),
+              },
+              board.id,
+            );
+            if (currentSeq <= lastAckSeqRef.current) return;
+            lastAckSeqRef.current = currentSeq;
+            if (!res.success) {
+              setLists(previousLists);
+            }
+          } catch {
+            if (currentSeq > lastAckSeqRef.current) {
+              lastAckSeqRef.current = currentSeq;
+              setLists(previousLists);
+            }
+          }
         });
       }
       return;
@@ -114,14 +144,27 @@ export function BoardCanvas({ board, onCardClick }: BoardCanvasProps) {
     const targetCard = reorderedDestCards[destination.index];
     if (targetCard) {
       startTransition(async () => {
-        await moveCardAction(
-          {
-            cardId: draggableId,
-            targetListId: destination.droppableId,
-            newPosition: targetCard.position,
-          },
-          board.id,
-        );
+        try {
+          const res = await moveCardAction(
+            {
+              cardId: draggableId,
+              targetListId: destination.droppableId,
+              newPosition: targetCard.position,
+              cardIds: reorderedDestCards.map((c) => c.id),
+            },
+            board.id,
+          );
+          if (currentSeq <= lastAckSeqRef.current) return;
+          lastAckSeqRef.current = currentSeq;
+          if (!res.success) {
+            setLists(previousLists);
+          }
+        } catch {
+          if (currentSeq > lastAckSeqRef.current) {
+            lastAckSeqRef.current = currentSeq;
+            setLists(previousLists);
+          }
+        }
       });
     }
   };
