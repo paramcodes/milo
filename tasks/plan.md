@@ -116,7 +116,7 @@ Seeding & Final Verification (prisma/seed.ts, check:arch, check:size, tests)
 - [x] Activity stream displays chronological audit history in the card modal
 
 ### Phase 9: Seeding, Verification & Final Polish
-- [ ] Task 18: Demo Seed Script (`prisma/seed.ts` for instant "Sprint Planning" testing)
+- [x] Task 18: Demo Seed Script (`prisma/seed.ts` for instant "Sprint Planning" testing)
 - [ ] Task 19: Full Suite Verification & Mechanical Guardrail Pass (all verification commands green)
 
 ### Checkpoint: Release Ready

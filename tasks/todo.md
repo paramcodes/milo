@@ -525,14 +525,14 @@
 **Description:** Implement `prisma/seed.ts` pre-populating a demo user, demo team, and populated "Sprint Planning" board for instant local testing.
 
 **Acceptance criteria:**
-- [ ] `prisma/seed.ts` creates demo user (`demo@milo.app`), demo team, and "Sprint Planning" board.
-- [ ] Board includes standard columns ("To Do", "In Progress", "In Review", "Done") populated with realistic cards, labels, checklists, and activity entries.
-- [ ] Running `bun run seed` executes without errors and is idempotent.
+- [x] `prisma/seed.ts` creates demo user (`demo@milo.app`), demo team, and "Sprint Planning" board.
+- [x] Board includes standard columns ("To Do", "In Progress", "In Review", "Done") populated with realistic cards, labels, checklists, and activity entries.
+- [x] Running `bun run seed` executes without errors and is idempotent.
 
 **Verification:**
-- [ ] Tests pass: `bun run seed` exits with 0
-- [ ] Build succeeds: `bun x tsc --noEmit`
-- [ ] Manual check: SQLite database contains populated board records
+- [x] Tests pass: `bun run seed` exits with 0
+- [x] Build succeeds: `bun x tsc --noEmit`
+- [x] Manual check: SQLite database contains populated board records
 
 **Dependencies:** Task 2, Task 12, Task 17
 
