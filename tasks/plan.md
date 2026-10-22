@@ -80,7 +80,7 @@ Seeding & Final Verification (prisma/seed.ts, check:arch, check:size, tests)
 - [x] Board access restrictions enforced by workspace/user ownership
 
 ### Phase 4: Lists & Column Management (Vertical Slice)
-- [ ] Task 10: Lists Domain Backend (`src/features/lists/lists.{schema,repo,service}.ts`)
+- [x] Task 10: Lists Domain Backend (`src/features/lists/lists.{schema,repo,service}.ts`)
 - [ ] Task 11: Lists Server Actions & Column Components (`src/features/lists/lists.api.ts`, list components)
 
 ### Checkpoint: Lists Management

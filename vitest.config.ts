@@ -6,6 +6,7 @@ export default defineConfig({
     include: ['src/**/*.test.ts', 'src/**/*.test.tsx'],
     environment: 'jsdom',
     globals: true,
+    fileParallelism: false,
     env: {
       DATABASE_URL: 'file:./test.db',
     },

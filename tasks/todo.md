@@ -274,15 +274,15 @@
 **Description:** Implement lists domain logic: validation schemas, repository queries, and service with position management and cascade deletion.
 
 **Acceptance criteria:**
-- [ ] `src/features/lists/lists.schema.ts` defines `createListSchema`, `updateListTitleSchema`, and `reorderListsSchema`.
-- [ ] `src/features/lists/lists.repo.ts` queries lists by board ID and handles list deletion with cascade.
-- [ ] `src/features/lists/lists.service.ts` calculates position intervals (multiples of 1000) using `reorder.calc.ts` and returns `Result<ListDto>`.
-- [ ] `src/features/lists/lists.service.test.ts` verifies list creation, title update, and cascade deletion on ephemeral SQLite.
+- [x] `src/features/lists/lists.schema.ts` defines `createListSchema`, `updateListTitleSchema`, and `reorderListsSchema`.
+- [x] `src/features/lists/lists.repo.ts` queries lists by board ID and handles list deletion with cascade.
+- [x] `src/features/lists/lists.service.ts` calculates position intervals (multiples of 1000) using `reorder.calc.ts` and returns `Result<ListDto>`.
+- [x] `src/features/lists/lists.service.test.ts` verifies list creation, title update, and cascade deletion on ephemeral SQLite.
 
 **Verification:**
-- [ ] Tests pass: `bun test src/features/lists/lists.service.test.ts` passes
-- [ ] Build succeeds: `bun x tsc --noEmit`
-- [ ] Manual check: Deleting a list cleans up child records
+- [x] Tests pass: `bun test src/features/lists/lists.service.test.ts` passes
+- [x] Build succeeds: `bun x tsc --noEmit`
+- [x] Manual check: Deleting a list cleans up child records
 
 **Dependencies:** Task 3, Task 8
 
