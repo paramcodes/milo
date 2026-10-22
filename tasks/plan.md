@@ -109,11 +109,11 @@ Seeding & Final Verification (prisma/seed.ts, check:arch, check:size, tests)
 - [x] Presenter calculates completion percentage and overdue/due-soon status correctly
 
 ### Phase 8: Audit Trail & Activity Logging (Vertical Slice)
-- [ ] Task 17: Activity Stream & Audit Logging Integration (ActivityLog entries, feed component in modal)
+- [x] Task 17: Activity Stream & Audit Logging Integration (ActivityLog entries, feed component in modal)
 
 ### Checkpoint: Audit Trail
-- [ ] All card state changes (move, title edit, checklist toggle) record immutable activity entries
-- [ ] Activity stream displays chronological audit history in the card modal
+- [x] All card state changes (move, title edit, checklist toggle) record immutable activity entries
+- [x] Activity stream displays chronological audit history in the card modal
 
 ### Phase 9: Seeding, Verification & Final Polish
 - [ ] Task 18: Demo Seed Script (`prisma/seed.ts` for instant "Sprint Planning" testing)

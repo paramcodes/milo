@@ -106,4 +106,20 @@ describe('cards.service integration (zero-mock SQLite)', () => {
     const cardInDb = await db.card.findUnique({ where: { id: c.data.id } });
     expect(cardInDb).toBeNull();
   });
+
+  it('records ActivityLog entries on card creation and moves', async () => {
+    const c = await createCardCommand({ listId: listId1, title: 'Audited Card' }, userId);
+    if (!c.success) return;
+
+    await moveCardCommand({ cardId: c.data.id, targetListId: listId2, newPosition: 3000 }, userId);
+
+    const logs = await db.activityLog.findMany({
+      where: { cardId: c.data.id },
+      orderBy: { createdAt: 'asc' },
+    });
+
+    expect(logs).toHaveLength(2);
+    expect(logs[0]?.action).toBe('CREATED_CARD');
+    expect(logs[1]?.action).toBe('MOVED_CARD');
+  });
 });

@@ -6,6 +6,7 @@ import React, { useState, useTransition } from 'react';
 import { deleteCardAction, updateCardAction } from '../cards.api';
 import type { CardDto } from '../cards.schema';
 
+import { ActivityStream } from './activity-stream';
 import { Checklist } from './checklist';
 import { DueDateBadge } from './due-date-badge';
 import { LabelPicker } from './label-picker';
@@ -136,6 +137,9 @@ export function CardModal({ card, boardId, isOpen, onClose, children }: CardModa
 
           {/* Checklist Section */}
           <Checklist cardId={card.id} boardId={boardId} items={card.checklists ?? []} />
+
+          {/* Activity Stream Section */}
+          <ActivityStream activities={card.activities ?? []} />
 
           {/* Child Components (Activity, etc.) */}
           {children}

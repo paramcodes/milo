@@ -490,15 +490,15 @@
 **Description:** Record immutable audit entries in `cards.service.ts` transactions and display real-time activity history in the card modal.
 
 **Acceptance criteria:**
-- [ ] `src/features/cards/cards.repo.ts` includes `createActivityLogTx` and queries activities ordered by `createdAt: 'desc'`.
-- [ ] `src/features/cards/cards.service.ts` records `ActivityLog` on card creation, move, title edit, and checklist toggle inside transactions.
-- [ ] `src/features/cards/components/activity-stream.tsx` displays chronological user activity feed with human-readable event descriptions.
-- [ ] `card-modal.tsx` embeds `<ActivityStream />` tab or section.
+- [x] `src/features/cards/cards.repo.ts` includes `createActivityLogTx` and queries activities ordered by `createdAt: 'desc'`.
+- [x] `src/features/cards/cards.service.ts` records `ActivityLog` on card creation, move, title edit, and checklist toggle inside transactions.
+- [x] `src/features/cards/components/activity-stream.tsx` displays chronological user activity feed with human-readable event descriptions.
+- [x] `card-modal.tsx` embeds `<ActivityStream />` tab or section.
 
 **Verification:**
-- [ ] Tests pass: `bun test src/features/cards/cards.service.test.ts` verifies activity logs are created
-- [ ] Build succeeds: `bun x tsc --noEmit`
-- [ ] Manual check: Moving a card or toggling a checklist item renders a new activity entry
+- [x] Tests pass: `bun test src/features/cards/cards.service.test.ts` verifies activity logs are created
+- [x] Build succeeds: `bun x tsc --noEmit`
+- [x] Manual check: Moving a card or toggling a checklist item renders a new activity entry
 
 **Dependencies:** Task 14, Task 15, Task 16
 
@@ -513,9 +513,9 @@
 ---
 
 ## Checkpoint: Activity Feed & Audit Integrity
-- [ ] Audit entries written on all card mutations
-- [ ] Activity stream displays actor and timestamp accurately
-- [ ] Review with human before proceeding
+- [x] Audit entries written on all card mutations
+- [x] Activity stream displays actor and timestamp accurately
+- [x] Review with human before proceeding
 
 ---
 
