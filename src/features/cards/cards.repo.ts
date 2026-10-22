@@ -27,6 +27,13 @@ export async function findCardById(cardId: string) {
   });
 }
 
+export async function findListById(listId: string) {
+  return await db.list.findUnique({
+    where: { id: listId },
+    select: { id: true, boardId: true },
+  });
+}
+
 export async function getMaxCardPosition(listId: string): Promise<number> {
   const lastCard = await db.card.findFirst({
     where: { listId },

@@ -96,6 +96,25 @@ describe('cards.service integration (zero-mock SQLite)', () => {
     expect(cardInDb?.position).toBe(1500);
   });
 
+  it('returns LIST_NOT_FOUND when moving card to a nonexistent or deleted list', async () => {
+    const c = await createCardCommand({ listId: listId1, title: 'Move Me' }, userId);
+    if (!c.success) return;
+
+    const moveResult = await moveCardCommand(
+      {
+        cardId: c.data.id,
+        targetListId: 'nonexistent-list-id',
+        newPosition: 1000,
+      },
+      userId,
+    );
+
+    expect(moveResult.success).toBe(false);
+    if (!moveResult.success) {
+      expect(moveResult.error.code).toBe('LIST_NOT_FOUND');
+    }
+  });
+
   it('deletes card', async () => {
     const c = await createCardCommand({ listId: listId1, title: 'Delete Me' }, userId);
     if (!c.success) return;

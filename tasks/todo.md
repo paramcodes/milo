@@ -6,14 +6,14 @@
 **Description:** Guard `moveCardCommand` against invalid or concurrently deleted target lists. Validate that `input.targetListId` exists before executing the card position update transaction, returning a structured `Result.failure('LIST_NOT_FOUND', 'Target list not found')` instead of triggering an unhandled Prisma foreign key constraint exception.
 
 **Acceptance criteria:**
-- [ ] `moveCardCommand` queries list existence using isolated repo method before or inside transaction.
-- [ ] Returns `Result.failure('LIST_NOT_FOUND', 'Target list not found')` when the destination list does not exist.
-- [ ] Returns `Result.failure('CARD_NOT_FOUND', 'Card not found')` when the target card does not exist.
-- [ ] Returns `Result.success(undefined)` when the card and list are valid.
+- [x] `moveCardCommand` queries list existence using isolated repo method before or inside transaction.
+- [x] Returns `Result.failure('LIST_NOT_FOUND', 'Target list not found')` when the destination list does not exist.
+- [x] Returns `Result.failure('CARD_NOT_FOUND', 'Card not found')` when the target card does not exist.
+- [x] Returns `Result.success(undefined)` when the card and list are valid.
 
 **Verification:**
-- [ ] Tests pass: `bun test src/features/cards/cards.service.test.ts`
-- [ ] Type check succeeds: `bun x tsc --noEmit`
+- [x] Tests pass: `bun test src/features/cards/cards.service.test.ts`
+- [x] Type check succeeds: `bun x tsc --noEmit`
 
 **Dependencies:** None
 

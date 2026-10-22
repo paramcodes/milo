@@ -90,6 +90,11 @@ export async function moveCardCommand(
     return Result.failure('CARD_NOT_FOUND', 'Card not found');
   }
 
+  const targetList = await cardsRepo.findListById(input.targetListId);
+  if (!targetList) {
+    return Result.failure('LIST_NOT_FOUND', 'Target list not found');
+  }
+
   await db.$transaction(async (tx) => {
     await cardsRepo.updateCardPositionTx(tx as unknown as typeof db, input);
     await cardsRepo.createActivityLogTx(
