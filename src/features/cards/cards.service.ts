@@ -96,7 +96,37 @@ export async function moveCardCommand(
   }
 
   await db.$transaction(async (tx) => {
-    await cardsRepo.updateCardPositionTx(tx as unknown as typeof db, input);
+    if (input.cardIds && input.cardIds.length > 0) {
+      const updates = input.cardIds.map((id, index) => ({
+        id,
+        position: (index + 1) * 1000,
+        ...(id === input.cardId ? { listId: input.targetListId } : {}),
+      }));
+      await cardsRepo.updateCardPositionsTx(tx as unknown as typeof db, updates);
+    } else {
+      const targetCards = await cardsRepo.getCardsByListId(input.targetListId);
+      const hasCollision = targetCards.some(
+        (c) => c.id !== input.cardId && c.position === input.newPosition,
+      );
+
+      if (hasCollision) {
+        const otherCards = targetCards.filter((c) => c.id !== input.cardId);
+        const insertIndex = otherCards.findIndex((c) => c.position >= input.newPosition);
+        if (insertIndex === -1) {
+          otherCards.push({ id: input.cardId, position: input.newPosition });
+        } else {
+          otherCards.splice(insertIndex, 0, { id: input.cardId, position: input.newPosition });
+        }
+        const updates = otherCards.map((c, index) => ({
+          id: c.id,
+          position: (index + 1) * 1000,
+          ...(c.id === input.cardId ? { listId: input.targetListId } : {}),
+        }));
+        await cardsRepo.updateCardPositionsTx(tx as unknown as typeof db, updates);
+      } else {
+        await cardsRepo.updateCardPositionTx(tx as unknown as typeof db, input);
+      }
+    }
     await cardsRepo.createActivityLogTx(
       tx as unknown as typeof db,
       input.cardId,

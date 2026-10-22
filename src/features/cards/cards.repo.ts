@@ -88,6 +88,29 @@ export async function updateCardPositionTx(
   });
 }
 
+export async function updateCardPositionsTx(
+  tx: typeof db,
+  updates: Array<{ id: string; position: number; listId?: string }>,
+) {
+  for (const update of updates) {
+    await tx.card.update({
+      where: { id: update.id },
+      data: {
+        position: update.position,
+        ...(update.listId ? { listId: update.listId } : {}),
+      },
+    });
+  }
+}
+
+export async function getCardsByListId(listId: string) {
+  return await db.card.findMany({
+    where: { listId },
+    orderBy: { position: 'asc' },
+    select: { id: true, position: true },
+  });
+}
+
 export async function deleteCard(cardId: string) {
   return await db.card.delete({
     where: { id: cardId },

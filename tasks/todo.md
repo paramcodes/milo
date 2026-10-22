@@ -29,14 +29,14 @@
 **Description:** Ensure that moving a card within a list or across lists recalculates and persists the positions of all affected cards in the destination list, guaranteeing the `UniquePositions` invariant formally proven in TLA+ (`CardPositioningFixed.tla`). Prevent SQLite position collisions where multiple cards end up with identical position integers.
 
 **Acceptance criteria:**
-- [ ] `moveCardCommand` calculates spaced positions (multiples of 1000) for all cards in the destination list.
-- [ ] Card movement and position rebalancing occur within a single atomic Prisma transaction (`db.$transaction`).
-- [ ] No two cards in the same list share the same position integer after any move operation.
-- [ ] Moving across lists correctly updates the card's `listId` and shifts destination list positions without creating duplicate ranks.
+- [x] `moveCardCommand` calculates spaced positions (multiples of 1000) for all cards in the destination list.
+- [x] Card movement and position rebalancing occur within a single atomic Prisma transaction (`db.$transaction`).
+- [x] No two cards in the same list share the same position integer after any move operation.
+- [x] Moving across lists correctly updates the card's `listId` and shifts destination list positions without creating duplicate ranks.
 
 **Verification:**
-- [ ] Tests pass: `bun test src/features/cards/cards.service.test.ts`
-- [ ] Architecture passes: `bun run check:arch`
+- [x] Tests pass: `bun test src/features/cards/cards.service.test.ts`
+- [x] Architecture passes: `bun run check:arch`
 
 **Dependencies:** Task 1
 
@@ -52,13 +52,13 @@
 **Description:** Add colocated zero-mock SQLite integration tests covering concurrent move scenarios, target list deletion edge cases, and position uniqueness invariants.
 
 **Acceptance criteria:**
-- [ ] Integration test verifies `moveCardCommand` returns `LIST_NOT_FOUND` when moving to a nonexistent/deleted list.
-- [ ] Integration test verifies all card positions in a list remain unique and strictly ordered (1000, 2000, 3000...) after moving card from start to middle or across lists.
-- [ ] Activity log entry records `MOVED_CARD` with accurate `fromListId`, `toListId`, and `newPosition`.
+- [x] Integration test verifies `moveCardCommand` returns `LIST_NOT_FOUND` when moving to a nonexistent/deleted list.
+- [x] Integration test verifies all card positions in a list remain unique and strictly ordered (1000, 2000, 3000...) after moving card from start to middle or across lists.
+- [x] Activity log entry records `MOVED_CARD` with accurate `fromListId`, `toListId`, and `newPosition`.
 
 **Verification:**
-- [ ] Tests pass: `bun test src/features/cards/cards.service.test.ts`
-- [ ] Biome check passes: `bun run check`
+- [x] Tests pass: `bun test src/features/cards/cards.service.test.ts`
+- [x] Biome check passes: `bun run check`
 
 **Dependencies:** Task 1, Task 2
 
@@ -70,9 +70,9 @@
 ---
 
 ## Checkpoint: Server Invariants Verified
-- [ ] All `cards.service.test.ts` tests execute and pass cleanly against SQLite
-- [ ] No raw runtime exceptions thrown on list deletion or invalid targets
-- [ ] `bun run check:arch` and `bun run check:size` pass
+- [x] All `cards.service.test.ts` tests execute and pass cleanly against SQLite
+- [x] No raw runtime exceptions thrown on list deletion or invalid targets
+- [x] `bun run check:arch` and `bun run check:size` pass
 
 ---
 

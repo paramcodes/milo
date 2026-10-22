@@ -18,6 +18,7 @@ export const moveCardSchema = z.object({
   cardId: z.string().min(1),
   targetListId: z.string().min(1),
   newPosition: z.number().int(),
+  cardIds: z.array(z.string()).optional(),
 });
 
 export const deleteCardSchema = z.object({
