@@ -73,11 +73,11 @@ Seeding & Final Verification (prisma/seed.ts, check:arch, check:size, tests)
 
 ### Phase 3: Boards & Workspace Dashboard (Vertical Slice)
 - [x] Task 8: Boards Domain Backend (`src/features/boards/boards.{schema,repo,service}.ts`)
-- [ ] Task 9: Boards Server Actions & Dashboard Shell (`src/features/boards/boards.api.ts`, dashboard components)
+- [x] Task 9: Boards Server Actions & Dashboard Shell (`src/features/boards/boards.api.ts`, dashboard components)
 
 ### Checkpoint: Boards & Dashboard
-- [ ] User can create, list, and view boards
-- [ ] Board access restrictions enforced by workspace/user ownership
+- [x] User can create, list, and view boards
+- [x] Board access restrictions enforced by workspace/user ownership
 
 ### Phase 4: Lists & Column Management (Vertical Slice)
 - [ ] Task 10: Lists Domain Backend (`src/features/lists/lists.{schema,repo,service}.ts`)

@@ -237,16 +237,16 @@
 **Description:** Implement Server Actions for boards and the user dashboard page displaying personal and team boards.
 
 **Acceptance criteria:**
-- [ ] `src/features/boards/boards.api.ts` provides `createBoardAction` and `updateBoardAction`.
-- [ ] `src/features/boards/components/boards-dashboard.tsx` renders board cards grid with a create board trigger.
-- [ ] `src/features/boards/components/board-header.tsx` displays board title and quick settings.
-- [ ] `src/app/(dashboard)/layout.tsx` provides dashboard navigation shell and session validation.
-- [ ] `src/app/(dashboard)/page.tsx` fetches user boards and renders `<BoardsDashboard />`.
+- [x] `src/features/boards/boards.api.ts` provides `createBoardAction` and `updateBoardAction`.
+- [x] `src/features/boards/components/boards-dashboard.tsx` renders board cards grid with a create board trigger.
+- [x] `src/features/boards/components/board-header.tsx` displays board title and quick settings.
+- [x] `src/app/(dashboard)/layout.tsx` provides dashboard navigation shell and session validation.
+- [x] `src/app/(dashboard)/page.tsx` fetches user boards and renders `<BoardsDashboard />`.
 
 **Verification:**
-- [ ] Tests pass: `bun run check:arch` passes
-- [ ] Build succeeds: `bun x tsc --noEmit`
-- [ ] Manual check: Dashboard shell renders cleanly with board cards
+- [x] Tests pass: `bun run check:arch` passes
+- [x] Build succeeds: `bun x tsc --noEmit`
+- [x] Manual check: Dashboard shell renders cleanly with board cards
 
 **Dependencies:** Task 7, Task 8
 
@@ -262,9 +262,9 @@
 ---
 
 ## Checkpoint: Boards & Workspace Management
-- [ ] User can create boards and view them on the dashboard
-- [ ] Server actions enforce user permissions
-- [ ] Review with human before proceeding
+- [x] User can create boards and view them on the dashboard
+- [x] Server actions enforce user permissions
+- [x] Review with human before proceeding
 
 ---
 
