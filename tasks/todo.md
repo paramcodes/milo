@@ -6,16 +6,16 @@
 **Description:** Initialize package.json, TypeScript configuration, Biome linter/formatter, Knip, and custom AST architectural linter & file size guard scripts.
 
 **Acceptance criteria:**
-- [ ] `package.json` contains all dependencies (`next`, `react`, `@prisma/client`, `@hello-pangea/dnd`, `zod`, `tailwind-merge`, `clsx`, `vitest`, `prisma`, `biome`, `knip`, etc.) and canonical scripts (`check:arch`, `check:size`, `check`, `knip`, `test`, `seed`).
-- [ ] `tsconfig.json` enforces strict TypeScript rules (`strict`, `noImplicitAny`, `strictNullChecks`, path alias `@/*`).
-- [ ] `biome.json` configures formatting and linting rules.
-- [ ] `scripts/lint-architecture.ts` checks layer import boundaries per SPEC.md and AGENTS.md.
-- [ ] `scripts/check-file-size.ts` enforces <400 LOC on all source files.
+- [x] `package.json` contains all dependencies (`next`, `react`, `@prisma/client`, `@hello-pangea/dnd`, `zod`, `tailwind-merge`, `clsx`, `vitest`, `prisma`, `biome`, `knip`, etc.) and canonical scripts (`check:arch`, `check:size`, `check`, `knip`, `test`, `seed`).
+- [x] `tsconfig.json` enforces strict TypeScript rules (`strict`, `noImplicitAny`, `strictNullChecks`, path alias `@/*`).
+- [x] `biome.json` configures formatting and linting rules.
+- [x] `scripts/lint-architecture.ts` checks layer import boundaries per SPEC.md and AGENTS.md.
+- [x] `scripts/check-file-size.ts` enforces <400 LOC on all source files.
 
 **Verification:**
-- [ ] Tests pass: `bun run check:size` succeeds
-- [ ] Build succeeds: `bun run check:arch` runs without error
-- [ ] Manual check: Run `bun run check` to verify Biome configuration
+- [x] Tests pass: `bun run check:size` succeeds
+- [x] Build succeeds: `bun run check:arch` runs without error
+- [x] Manual check: Run `bun run check` to verify Biome configuration
 
 **Dependencies:** None
 

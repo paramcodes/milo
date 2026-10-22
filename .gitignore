@@ -6,6 +6,7 @@ dist/
 *.db
 *.db-journal
 test.db
+tsconfig.tsbuildinfo
 .pi/
 .env*.local
 .DS_Store
